@@ -51,6 +51,32 @@ public partial class testPlayer : CharacterBody2D
 	public float FallProgress { get; set; } = 0f;
 	//public bool isFalling { get; set; } = false;
 
+
+	public void PlayerJump(float delta, Vector2 velocity) {
+		JumpProgress += delta;
+        float t = 0.25f - JumpProgress;
+        velocity.Y = -JumpHeight * (0.25f - (0.25f - t));
+		if (JumpProgress >= 0.25f) {
+			IsJumping = false;
+			FallProgress = 0;
+		}
+	}
+
+	public void PlayerMove(float delta, Vector2 velocity, int direction) {
+		if (direction != 0) {
+			//GD.Print("direction: " + direction);
+			velocity.X = Mathf.Lerp(velocity.X, direction * Speed, Acceleration * delta);
+		}
+		else {
+			velocity.X = Mathf.Lerp(velocity.X, 0, Friction * delta);
+		}
+	}
+
+	public void PlayerFall(float delta, Vector2 velocity) {
+		FallProgress += delta;
+		velocity.Y += FallProgress * Gravity * delta;
+	}
+
     public void GetInput(float delta) {
 
 		Vector2 velocity = new Vector2();
@@ -61,13 +87,7 @@ public partial class testPlayer : CharacterBody2D
 		if (Input.IsActionPressed("right")) {
 			direction += 1;
 		}		
-		if (direction != 0) {
-			//GD.Print("direction: " + direction);
-			velocity.X = Mathf.Lerp(velocity.X, direction * Speed, Acceleration * delta);
-		}
-		else {
-			velocity.X = Mathf.Lerp(velocity.X, 0, Friction * delta);
-		}
+		PlayerMove(delta, velocity, direction);
 		// jump
 		if (Input.IsActionJustPressed("up") && (IsOnFloor() || IsOnWall()) && !IsJumping) {
         	IsJumping = true;
@@ -75,20 +95,11 @@ public partial class testPlayer : CharacterBody2D
     	}
 
     	if (IsJumping) {
-        	JumpProgress += delta;
-        	float t = 0.25f - JumpProgress;
-        	velocity.Y = -JumpHeight * (0.25f - (0.25f - t));
+        	PlayerJump(delta, velocity);
 			GD.Print("JumpProgress: " + JumpProgress + " velocity.Y: " + velocity.Y);
-        if (JumpProgress >= 0.25f) {
-            IsJumping = false;
-			FallProgress = 0;
-        }
 		} else {
 			// gravity
-			
-			FallProgress += delta;
-			velocity.Y += FallProgress * Gravity * delta;
-
+			PlayerFall(delta, velocity);
 		}
     	Velocity = velocity;
 
