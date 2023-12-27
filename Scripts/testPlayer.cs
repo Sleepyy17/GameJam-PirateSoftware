@@ -42,15 +42,12 @@ public partial class testPlayer : CharacterBody2D
 {
 	[Export]
     public int Speed { get; set; } = 10000;
-
-	public int Gravity { get; set; } = 4000;
-
+	public int Gravity { get; set; } = 10000;
 	public float Friction { get; set; } = 0.1f;
-
 	public float Acceleration { get; set; } = 0.5f;
-
-	public int JumpHeight { get; set; } = 2000;
-
+	public int JumpHeight { get; set; } = 3000;
+	public float JumpProgress { get; set; } = 0f;
+	public bool IsJumping { get; set; } = false;
     public void GetInput(float delta) {
 
 		Vector2 velocity = new Vector2();
@@ -62,21 +59,43 @@ public partial class testPlayer : CharacterBody2D
 			direction += 1;
 		}		
 		if (direction != 0) {
-			GD.Print("direction: " + direction);
+			//GD.Print("direction: " + direction);
 			velocity.X = Mathf.Lerp(velocity.X, direction * Speed, Acceleration * delta);
 		}
 		else {
 			velocity.X = Mathf.Lerp(velocity.X, 0, Friction * delta);
 		}
 		// jump
+		if (Input.IsActionJustPressed("up") && (IsOnFloor() || IsOnWall()) && !IsJumping) {
+        	IsJumping = true;
+        	JumpProgress = 0f;
+    	}
 
-		if (Input.IsActionJustPressed("up") && (IsOnFloor() || IsOnWall())) {
-			velocity.Y = -JumpHeight;
+    	if (IsJumping) {
+        	JumpProgress += delta;
+        	float t = 0.25f - JumpProgress;
+        	velocity.Y = -JumpHeight * (0.25f - (0.25f - t));
+			GD.Print("JumpProgress: " + JumpProgress + " velocity.Y: " + velocity.Y);
+        if (JumpProgress >= 0.25f) {
+            IsJumping = false;
+        }
+		} else {
+			// gravity
+			velocity.Y += Gravity * delta;
 		}
+    	Velocity = velocity;
 
-		// gravity
-		velocity.Y += Gravity * delta;
-		Velocity = velocity;
+
+		// if (Input.IsActionJustPressed("up") && (IsOnFloor() || IsOnWall())) {
+		// 	//make a smooth jump by lerping the velocity
+			
+
+		// 	velocity.Y = -JumpHeight;
+		// }
+
+		// // gravity
+		// velocity.Y += Gravity * delta;
+		// Velocity = velocity;
     }
 
     public override void _PhysicsProcess(double delta) {
