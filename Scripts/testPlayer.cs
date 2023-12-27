@@ -5,8 +5,8 @@ using System;
 public partial class testPlayer : CharacterBody2D
 {
 	[Export]
-    public int Speed { get; set; } = 2000;
-	public int Gravity { get; set; } = 20000;
+    public int Speed { get; set; } = 20000;
+	public int Gravity { get; set; } = 30000;
 	public float Friction { get; set; } = 0.1f;
 	public float Acceleration { get; set; } = 0.5f;
 	public int JumpHeight { get; set; } = 5000;
@@ -15,40 +15,12 @@ public partial class testPlayer : CharacterBody2D
 	public float FallProgress { get; set; } = 0f;
 	//public bool isFalling { get; set; } = false;
 
-	public Vector2 velocity = new Vector2();
+    public void GetInput(float delta) {
 
-	public void PlayerJump(float delta, Vector2 velocity) {
-		GD.Print("JumpProgress: " + delta);
-		JumpProgress += delta;
-        float t = 0.25f - JumpProgress;
-        velocity.Y = -JumpHeight * (0.25f - (0.25f - t));
-		if (JumpProgress >= 0.25f) {
-			IsJumping = false;
+		if (IsOnFloor() || IsOnWall()) {
 			FallProgress = 0;
 		}
-		return;
-	}
-
-	public void PlayerMove(float delta, int direction) {
-		if (direction != 0) {
-			//GD.Print("direction: " + direction);
-			velocity.X = Mathf.Lerp(velocity.X, direction * Speed, Acceleration * delta);
-		}
-		else {
-			velocity.X = Mathf.Lerp(velocity.X, 0, Friction * delta);
-		}
-		return;
-	}
-
-	public void PlayerFall(float delta) {
-		FallProgress += delta;
-		velocity.Y += FallProgress * Gravity * delta;
-		return;
-	}
-
-    public void GetInput(float delta) {
-		velocity = Velocity;
-
+		Vector2 velocity = new Vector2();
 		int direction = 0; 
 		if (Input.IsActionPressed("left")) {
 			direction -= 1;
@@ -56,7 +28,13 @@ public partial class testPlayer : CharacterBody2D
 		if (Input.IsActionPressed("right")) {
 			direction += 1;
 		}		
-		PlayerMove(delta, direction);
+		if (direction != 0) {
+			//GD.Print("direction: " + direction);
+			velocity.X = Mathf.Lerp(velocity.X, direction * Speed, Acceleration * delta);
+		}
+		else {
+			velocity.X = Mathf.Lerp(velocity.X, 0, Friction * delta);
+		}
 		// jump
 		if (Input.IsActionJustPressed("up") && (IsOnFloor() || IsOnWall()) && !IsJumping) {
         	IsJumping = true;
@@ -64,11 +42,20 @@ public partial class testPlayer : CharacterBody2D
     	}
 
     	if (IsJumping) {
-        	PlayerJump(delta, velocity);
+        	JumpProgress += delta;
+        	float t = 0.25f - JumpProgress;
+        	velocity.Y = -JumpHeight * (0.25f - (0.25f - t));
 			GD.Print("JumpProgress: " + JumpProgress + " velocity.Y: " + velocity.Y);
+        if (JumpProgress >= 0.25f) {
+            IsJumping = false;
+			FallProgress = 0;
+        }
 		} else {
 			// gravity
-			PlayerFall(delta);
+			
+			FallProgress += delta;
+			velocity.Y += FallProgress * Gravity * delta * 4;
+
 		}
     	Velocity = velocity;
 
