@@ -48,6 +48,9 @@ public partial class testPlayer : CharacterBody2D
 	public int JumpHeight { get; set; } = 3000;
 	public float JumpProgress { get; set; } = 0f;
 	public bool IsJumping { get; set; } = false;
+	public float FallProgress { get; set; } = 0f;
+	public bool isFalling { get; set; } = false;
+
     public void GetInput(float delta) {
 
 		Vector2 velocity = new Vector2();
@@ -78,10 +81,13 @@ public partial class testPlayer : CharacterBody2D
 			GD.Print("JumpProgress: " + JumpProgress + " velocity.Y: " + velocity.Y);
         if (JumpProgress >= 0.25f) {
             IsJumping = false;
+			FallProgress = 0;
         }
 		} else {
 			// gravity
-			velocity.Y += Gravity * delta;
+			FallProgress += delta;
+			velocity.Y += FallProgress * Gravity * delta;
+
 		}
     	Velocity = velocity;
 
