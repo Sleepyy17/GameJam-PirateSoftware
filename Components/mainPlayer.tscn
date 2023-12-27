@@ -1,19 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhdpqr1lafsyy"]
+[gd_scene load_steps=9 format=3 uid="uid://dhdpqr1lafsyy"]
 
 [ext_resource type="Script" path="res://mainPlayer.cs" id="1_w2lji"]
-[ext_resource type="Texture2D" uid="uid://baldi5j58bud7" path="res://icon.svg" id="2_mvrxj"]
+[ext_resource type="Texture2D" uid="uid://pr7wlydp4o5r" path="res://mctake11/mctake1.png" id="2_6a6tc"]
+[ext_resource type="Texture2D" uid="uid://b2xu7k7v16fdg" path="res://mctake11/mctake2.png" id="3_dnlv6"]
+[ext_resource type="Texture2D" uid="uid://c6fsmbptxokdd" path="res://mctake11/mctake3.png" id="4_0drth"]
+[ext_resource type="Texture2D" uid="uid://dmiaupiqpanww" path="res://mctake11/mctake4.png" id="5_358lv"]
+[ext_resource type="Texture2D" uid="uid://652gkyw5itsj" path="res://mctake11/mctake5.png" id="6_hg0b6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7i5xv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6a6tc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dnlv6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0drth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_358lv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_hg0b6")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6a6tc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pfpv1"]
-size = Vector2(115, 116)
+size = Vector2(157.5, 182.615)
 
 [node name="mainPlayer" type="CharacterBody2D"]
 position = Vector2(285, 202)
 scale = Vector2(0.65, 0.65)
 script = ExtResource("1_w2lji")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_mvrxj")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(147.692, 48.4615)
+scale = Vector2(0.634615, 0.69391)
+sprite_frames = SubResource("SpriteFrames_7i5xv")
+animation = &"idle"
+frame_progress = 0.544448
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -1)
+position = Vector2(125.865, 79.4616)
 shape = SubResource("RectangleShape2D_pfpv1")

@@ -4,16 +4,26 @@ using System;
 public partial class mainPlayer : CharacterBody2D
 {
 	[Export]
-    public int Speed { get; set; } = 400;
+	public int Speed { get; set; } = 400;
+	private AnimatedSprite2D animatedSprite; 
 
-    public void GetInput() {
+	public override void _Ready()
+	{
+		// Get a reference to the AnimatedSprite2D node in your scene
+		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+	}
 
-        Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
-        Velocity = inputDirection * Speed;
-    }
+	public void GetInput() {
 
-    public override void _PhysicsProcess(double delta) {
-        GetInput();
-        MoveAndSlide();
-    }
+		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
+		Velocity = inputDirection * Speed;
+		if (Input.IsActionJustPressed("click")) {
+			animatedSprite.Play("attack");
+		} 
+	}
+
+	public override void _PhysicsProcess(double delta) {
+		GetInput();
+		MoveAndSlide();
+	}
 }
