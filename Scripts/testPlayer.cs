@@ -42,14 +42,14 @@ public partial class testPlayer : CharacterBody2D
 {
 	[Export]
     public int Speed { get; set; } = 10000;
-	public int Gravity { get; set; } = 10000;
+	public int Gravity { get; set; } = 50000;
 	public float Friction { get; set; } = 0.1f;
 	public float Acceleration { get; set; } = 0.5f;
 	public int JumpHeight { get; set; } = 3000;
 	public float JumpProgress { get; set; } = 0f;
 	public bool IsJumping { get; set; } = false;
 	public float FallProgress { get; set; } = 0f;
-	public bool isFalling { get; set; } = false;
+	//public bool isFalling { get; set; } = false;
 
     public void GetInput(float delta) {
 
@@ -85,6 +85,7 @@ public partial class testPlayer : CharacterBody2D
         }
 		} else {
 			// gravity
+			
 			FallProgress += delta;
 			velocity.Y += FallProgress * Gravity * delta;
 
