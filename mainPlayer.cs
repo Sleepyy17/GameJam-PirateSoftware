@@ -4,16 +4,38 @@ using System;
 public partial class mainPlayer : CharacterBody2D
 {
 	[Export]
-    public int Speed { get; set; } = 400;
+	public int Speed { get; set; } = 400;
 
-    public void GetInput() {
+	private float maxHealth = 100;
+	private float currentHealth;
 
-        Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
-        Velocity = inputDirection * Speed;
-    }
+	public override void _Ready()
+	{
+		currentHealth = maxHealth;
+	}
 
-    public override void _PhysicsProcess(double delta) {
-        GetInput();
-        MoveAndSlide();
-    }
+	public void GetMovementInput() {
+		Vector2 inputDirection = Input.GetVector("left", "right", "up", "down");
+		Velocity = inputDirection * Speed;
+	}
+
+	public override void _PhysicsProcess(double delta) {
+		GetMovementInput();
+		MoveAndSlide();
+		Attack();
+	}
+	
+	public void Attack() {
+		
+		if (Input.IsActionJustPressed("click")) {
+			GetNode<AnimationPlayer>("AnimationPlayer").Play("attack");
+			GD.Print(currentHealth);
+		}
+		
+	}
+	
+	public void takeDamage(float damageTaken)
+	{
+		currentHealth = currentHealth - damageTaken;
+	}
 }
