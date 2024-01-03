@@ -1,62 +1,63 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhdpqr1lafsyy"]
+[gd_scene load_steps=7 format=3 uid="uid://dhdpqr1lafsyy"]
 
 [ext_resource type="Script" path="res://mainPlayer.cs" id="1_w2lji"]
-[ext_resource type="Texture2D" uid="uid://pr7wlydp4o5r" path="res://mctake11/mctake1.png" id="2_6a6tc"]
-[ext_resource type="Texture2D" uid="uid://b2xu7k7v16fdg" path="res://mctake11/mctake2.png" id="3_dnlv6"]
-[ext_resource type="Texture2D" uid="uid://c6fsmbptxokdd" path="res://mctake11/mctake3.png" id="4_0drth"]
-[ext_resource type="Texture2D" uid="uid://dmiaupiqpanww" path="res://mctake11/mctake4.png" id="5_358lv"]
-[ext_resource type="Texture2D" uid="uid://652gkyw5itsj" path="res://mctake11/mctake5.png" id="6_hg0b6"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7i5xv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_6a6tc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_dnlv6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_0drth")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_358lv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_hg0b6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_6a6tc")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_6a6tc")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
+[ext_resource type="Texture2D" uid="uid://b7vosdgca6fq7" path="res://mctake1.png" id="2_f0oit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pfpv1"]
-size = Vector2(157.5, 182.615)
+size = Vector2(188.606, 201.038)
+
+[sub_resource type="Animation" id="Animation_o1wv1"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mctake1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_5y2c1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mctake1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_smxc8"]
+_data = {
+"RESET": SubResource("Animation_5y2c1"),
+"attack": SubResource("Animation_o1wv1")
+}
 
 [node name="mainPlayer" type="CharacterBody2D"]
 position = Vector2(285, 202)
 scale = Vector2(0.65, 0.65)
 script = ExtResource("1_w2lji")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(147.692, 48.4615)
-scale = Vector2(0.634615, 0.69391)
-sprite_frames = SubResource("SpriteFrames_7i5xv")
-animation = &"attack"
-frame = 5
-frame_progress = 1.0
+[node name="Mctake1" type="Sprite2D" parent="."]
+position = Vector2(152.308, 41.5385)
+scale = Vector2(0.710737, 0.785257)
+texture = ExtResource("2_f0oit")
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(125.865, 79.4616)
+position = Vector2(137.38, 74.8654)
 shape = SubResource("RectangleShape2D_pfpv1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_smxc8")
+}

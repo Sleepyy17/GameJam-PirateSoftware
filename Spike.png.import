@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6fsmbptxokdd"
-path="res://.godot/imported/mctake3.png-72ccd52464766cece7b27ee6b16dce14.ctex"
+uid="uid://bid38h0fnorm4"
+path="res://.godot/imported/Spike.png-0132a1304200126d97ec8dd6dcfa11be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mctake11/mctake3.png"
-dest_files=["res://.godot/imported/mctake3.png-72ccd52464766cece7b27ee6b16dce14.ctex"]
+source_file="res://Spike.png"
+dest_files=["res://.godot/imported/Spike.png-0132a1304200126d97ec8dd6dcfa11be.ctex"]
 
 [params]
 

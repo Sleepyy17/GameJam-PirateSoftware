@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpk6aoe3eyj0v"]
+[gd_scene load_steps=4 format=3 uid="uid://bpk6aoe3eyj0v"]
 
 [ext_resource type="PackedScene" uid="uid://dhdpqr1lafsyy" path="res://Components/mainPlayer.tscn" id="1_h4ib5"]
 [ext_resource type="PackedScene" uid="uid://ef538xr1n2dr" path="res://Components/chest.tscn" id="2_nvbqk"]
+[ext_resource type="PackedScene" uid="uid://dtctpuj727cd3" path="res://Components/spike.tscn" id="3_xogjs"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Chest" parent="." instance=ExtResource("2_nvbqk")]
+position = Vector2(574, 350)
+
+[node name="Spike" parent="." instance=ExtResource("3_xogjs")]
+position = Vector2(-198, -37)
 
 [node name="mainPlayer" parent="." instance=ExtResource("1_h4ib5")]
-position = Vector2(268, 159)
+position = Vector2(176, 282)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2xu7k7v16fdg"
-path="res://.godot/imported/mctake2.png-8a7b79b5f381f06ba98932106572c08d.ctex"
+uid="uid://b7vosdgca6fq7"
+path="res://.godot/imported/mctake1.png-e5e2338646cdf7c02c009d166849556d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mctake11/mctake2.png"
-dest_files=["res://.godot/imported/mctake2.png-8a7b79b5f381f06ba98932106572c08d.ctex"]
+source_file="res://mctake1.png"
+dest_files=["res://.godot/imported/mctake1.png-e5e2338646cdf7c02c009d166849556d.ctex"]
 
 [params]
 
