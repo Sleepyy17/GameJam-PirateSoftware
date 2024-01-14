@@ -28,3 +28,4 @@ scale = Vector2(0.315, 0.315)
 
 [node name="Knife" parent="." instance=ExtResource("3_x37yf")]
 position = Vector2(600, 189)
+scale = Vector2(0.439024, 0.439024)

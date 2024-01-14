@@ -8,7 +8,14 @@ public partial class knifeCharacter : CharacterBody2D
 	Line2D line;
 
 	bool mouseWasReleased = true;
+
+	bool isInAir = false;
 	
+	float FallProgress = 0f;
+
+	int Gravity = 100;
+
+
 	public override void _Ready()
 	{
 		rigidBody = GetNode<RigidBody2D>("RigidBody2D");
@@ -19,7 +26,7 @@ public partial class knifeCharacter : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		// if mouse down do function
-		
+
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
 			if (mouseWasReleased)
@@ -41,7 +48,20 @@ public partial class knifeCharacter : CharacterBody2D
 			mouseWasReleased = true;
 		}
 
+
+		Vector2 velocity = Velocity;
+		if (IsOnFloor() || IsOnWall()) {
+			FallProgress = 0;
+			if (isInAir == false)
+			{
+				velocity.X = 0;
+			}
+			isInAir = false;
+		}
+		FallProgress += (float)delta;
+		velocity.Y += FallProgress * Gravity * (float)delta*10;
 		//Velocity = rigidBody.LinearVelocity;
+		Velocity = velocity;
 		MoveAndSlide();
 	}
 	void OnMouseDown()
@@ -73,6 +93,7 @@ public partial class knifeCharacter : CharacterBody2D
 	void OnMouseUp()
 	{
 		ThrowKnife();
+		isInAir = true;
 		GD.Print("Mouse up");
 	}
 
@@ -80,8 +101,8 @@ public partial class knifeCharacter : CharacterBody2D
 	{
 		// add velocity to the knife
 		float throwForce = 1f;
-    	rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
-		Velocity = throwVector * throwForce;
+    	//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
+		Velocity = throwVector * throwForce*5;
 	}
 
 }
