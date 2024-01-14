@@ -24,7 +24,4 @@ layer_0/tile_data = PackedInt32Array(1966080, 0, 0, 1966081, 0, 0, 1966082, 0, 0
 
 [node name="mainPlayer" parent="." instance=ExtResource("2_uli1g")]
 scale = Vector2(0.315, 0.315)
-<<<<<<< HEAD
-=======
 Speed = null
->>>>>>> throw_character
