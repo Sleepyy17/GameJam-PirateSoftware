@@ -45,7 +45,7 @@ _data = {
 [node name="mainPlayer" type="CharacterBody2D"]
 position = Vector2(285, 202)
 scale = Vector2(0.65, 0.65)
-script = ExtResource("1_v42l6")
+script = ExtResource("1_w2lji")
 
 [node name="Mctake1" type="Sprite2D" parent="."]
 position = Vector2(152.308, 41.5385)
