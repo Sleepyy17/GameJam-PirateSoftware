@@ -29,18 +29,18 @@ public partial class Chest : Node2D
 		}
 	}
 	private void _on_interaction_area_body_entered(PhysicsBody2D body) {
-        // Check if the area is the player
+		// Check if the area is the player
 			GD.Print("Player entered");
-        if (body.Name == "mainPlayer") {
-            isPlayerInRange = true;
-        }
-    }
+		if (body.Name == "mainPlayer") {
+			isPlayerInRange = true;
+		}
+	}
 
-    private void _on_interaction_area_body_exited(PhysicsBody2D body) {
-        // Check if the area is the player
+	private void _on_interaction_area_body_exited(PhysicsBody2D body) {
+		// Check if the area is the player
 			GD.Print("Player exited");
-        if (body.Name == "mainPlayer") {
-            isPlayerInRange = false;
-        }
-    }
+		if (body.Name == "mainPlayer") {
+			isPlayerInRange = false;
+		}
+	}
 }

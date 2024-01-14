@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://yy62pgv4k3nd"]
+[gd_scene load_steps=5 format=3 uid="uid://bhynmw6ujdbie"]
 
-[ext_resource type="Texture2D" uid="uid://bkavyn1skfn50" path="res://Starter Tiles Platformer/DarkCastleTiles/DarkCastle_1_16x16.png" id="1_wjvut"]
-[ext_resource type="PackedScene" uid="uid://ciwcauhlvw4xj" path="res://Components/testPlayer.tscn" id="2_uli1g"]
+[ext_resource type="Texture2D" path="res://Starter Tiles Platformer/DarkCastleTiles/DarkCastle_1_16x16.png" id="1_wjvut"]
+[ext_resource type="PackedScene" uid="uid://dlct3j6ri5wbj" path="res://Components/testPlayer.tscn" id="2_uli1g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_udqft"]
 texture = ExtResource("1_wjvut")
@@ -24,3 +24,7 @@ layer_0/tile_data = PackedInt32Array(1966080, 0, 0, 1966081, 0, 0, 1966082, 0, 0
 
 [node name="mainPlayer" parent="." instance=ExtResource("2_uli1g")]
 scale = Vector2(0.315, 0.315)
+<<<<<<< HEAD
+=======
+Speed = null
+>>>>>>> throw_character
