@@ -20,7 +20,7 @@ public partial class knifeCharacter : CharacterBody2D
 	{
 		// if mouse down do function
 		
-		if (Input.IsActionJustPressed("click"))
+		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
 			if (mouseWasReleased)
 			{
