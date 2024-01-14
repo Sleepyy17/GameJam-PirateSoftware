@@ -131,7 +131,6 @@ public partial class testPlayer : CharacterBody2D
     public override void _PhysicsProcess(double delta) {
 
         GetInput((float)delta);
-		GD.Print("Velocity: " + Velocity);
         MoveAndSlide();
     }
 }

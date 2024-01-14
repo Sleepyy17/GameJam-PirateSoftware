@@ -4,6 +4,7 @@ using System;
 public partial class knifeCharacter : CharacterBody2D
 {
 	Vector2 throwVector;
+	float throwForce;
 	RigidBody2D rigidBody;
 	Line2D line;
 
@@ -80,14 +81,16 @@ public partial class knifeCharacter : CharacterBody2D
 	{
 		Vector2 mousePosition = GetGlobalMousePosition();
 		Vector2 position = Position;
-		throwVector = -(mousePosition - position).Normalized() * 100;
+		throwForce = (mousePosition - position).Length();
+		if (throwForce > 300f) throwForce = 300f;
+		throwVector = -(mousePosition - position).Normalized();
 		GD.Print(throwVector);
 
 	}
 
 	void SetArrow()
 	{
-		line.Points = new Vector2[] { Vector2.Zero, throwVector * 100 };
+		line.Points = new Vector2[] { Vector2.Zero, throwVector * throwForce };
 	}
 
 	void OnMouseUp()
@@ -100,9 +103,8 @@ public partial class knifeCharacter : CharacterBody2D
 	void ThrowKnife()
 	{
 		// add velocity to the knife
-		float throwForce = 1f;
     	//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
-		Velocity = throwVector * throwForce*5;
+		Velocity = throwVector * throwForce * 2;
 	}
 
 }
