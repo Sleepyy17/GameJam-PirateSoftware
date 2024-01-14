@@ -6,20 +6,23 @@ public partial class knifeCharacter : CharacterBody2D
 	Vector2 throwVector;
 	RigidBody2D rigidBody;
 	Line2D line;
+	Sprite2D sprite;
 
 	bool mouseWasReleased = true;
 	
 	public override void _Ready()
 	{
 		rigidBody = GetNode<RigidBody2D>("RigidBody2D");
+		sprite = GetNode<Sprite2D>("Sprite2D");
 		line = GetNode<Line2D>("Line2D");
 		rigidBody.GravityScale = 0;
 	}
 
 	public override void _Process(double delta)
-	{
-		// if mouse down do function
+	{	
 		
+		// if mouse down do function
+	
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
 			if (mouseWasReleased)
@@ -40,8 +43,6 @@ public partial class knifeCharacter : CharacterBody2D
 			OnMouseUp();
 			mouseWasReleased = true;
 		}
-
-		//Velocity = rigidBody.LinearVelocity;
 		MoveAndSlide();
 	}
 	void OnMouseDown()
@@ -80,8 +81,13 @@ public partial class knifeCharacter : CharacterBody2D
 	{
 		// add velocity to the knife
 		float throwForce = 1f;
-    	rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
+		rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
 		Velocity = throwVector * throwForce;
+		
 	}
+	
+
+	
+	
 
 }
