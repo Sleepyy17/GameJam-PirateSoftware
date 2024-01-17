@@ -28,10 +28,10 @@ polygon = PackedVector2Array(34, -42, 34, -16, 0, 17, -12, 4)
 [node name="HandleSide" type="CollisionPolygon2D" parent="HandleArea"]
 polygon = PackedVector2Array(-39, 41, -39, 30, -14, 6, -6, 16, -30, 41)
 
-[node name="BladeSide" type="CollisionPolygon2D" parent="."]
+[node name="BladeSideCol" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(28, -35, 31, -16, 3, 11, -5, 1)
 
-[node name="HandleSide" type="CollisionPolygon2D" parent="."]
+[node name="HandleSideCol" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-37, 39, -37, 31, -16, 11, -10, 17, -31, 38)
 
 [connection signal="body_entered" from="BladeArea" to="." method="_on_blade_area_body_entered"]
