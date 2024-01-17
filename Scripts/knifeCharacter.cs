@@ -51,15 +51,7 @@ public partial class knifeCharacter : CharacterBody2D
 
 
 		Vector2 velocity = Velocity;
-		if (IsOnFloor() || IsOnWall()) {
-			FallProgress = 0;
-			if (isInAir == false)
-			{
-				velocity.X = 0;
-				
-			}
-			isInAir = false;
-		}
+		
 		//test
 		FallProgress += (float)delta;
 		velocity.Y += FallProgress * Gravity * (float)delta*10;
@@ -67,10 +59,20 @@ public partial class knifeCharacter : CharacterBody2D
 		Velocity = velocity;
 		
 		// Rotates The knife Sprite by 0.1f
-		if (velocity.Length() > 0.1f) {
-			GetNode<Sprite2D>("KnifeSprite").Rotate(0.1f);
+		var collision = MoveAndCollide(Velocity * (float)delta);
+		if (velocity.Length() > 0) {
+			GetNode<Sprite2D>("KnifeSprite").Rotate(velocity.Length()/10*(float)0.005f);
 		}
-		MoveAndSlide();
+		if (collision != null) {
+			FallProgress = 0;
+			if (isInAir == false)
+			{
+				velocity.X = 0;
+				
+			}
+			isInAir = false;
+			Velocity = Velocity.Slide(collision.GetNormal())*(float)0.5;
+		}
 		
 		
 	}
