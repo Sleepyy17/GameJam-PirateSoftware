@@ -56,6 +56,8 @@ public partial class knifeCharacter : CharacterBody2D
 			if (isInAir == false)
 			{
 				velocity.X = 0;
+				GetNode<AnimationPlayer>("Knife/AnimationPlayer").Stop();
+				
 			}
 			isInAir = false;
 		}
@@ -64,6 +66,8 @@ public partial class knifeCharacter : CharacterBody2D
 		//Velocity = rigidBody.LinearVelocity;
 		Velocity = velocity;
 		MoveAndSlide();
+		
+		
 	}
 	void OnMouseDown()
 	{
@@ -77,10 +81,11 @@ public partial class knifeCharacter : CharacterBody2D
 		SetArrow();
 	}
 
-	void CalculateThrowVector()
+	public void CalculateThrowVector()
 	{
 		Vector2 mousePosition = GetGlobalMousePosition();
 		Vector2 position = Position;
+		Vector2 relativePosition = mousePosition - position;
 		throwForce = (mousePosition - position).Length();
 		if (throwForce > 300f) throwForce = 300f;
 		throwVector = -(mousePosition - position).Normalized();
@@ -105,6 +110,7 @@ public partial class knifeCharacter : CharacterBody2D
 		// add velocity to the knife
 		//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
 		Velocity = throwVector * throwForce * 2;
+		GetNode<AnimationPlayer>("Knife/AnimationPlayer").Play("spinClockwise");
 	}
 
 }
