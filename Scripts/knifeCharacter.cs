@@ -60,6 +60,7 @@ public partial class knifeCharacter : CharacterBody2D
 			}
 			isInAir = false;
 		}
+		//test
 		FallProgress += (float)delta;
 		velocity.Y += FallProgress * Gravity * (float)delta*10;
 		//Velocity = rigidBody.LinearVelocity;
