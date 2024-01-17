@@ -67,7 +67,7 @@ public partial class knifeCharacter : CharacterBody2D
 		Velocity = velocity;
 		
 		// Rotates The knife Sprite by 0.1f
-		if (velocity.Length() > 0.1f) {
+		if (velocity.Length() > 0.1f && !IsOnFloor() && !IsOnWall()) {
 			GetNode<Sprite2D>("KnifeSprite").Rotate(0.1f);
 		}
 		MoveAndSlide();
