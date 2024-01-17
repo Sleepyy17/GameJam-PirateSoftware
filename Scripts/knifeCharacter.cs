@@ -8,6 +8,9 @@ public partial class knifeCharacter : CharacterBody2D
 	RigidBody2D rigidBody;
 	Line2D line;
 
+	[Export] 
+	public TileMap map;
+
 	bool mouseWasReleased = true;
 
 	bool isInAir = false;
@@ -61,7 +64,7 @@ public partial class knifeCharacter : CharacterBody2D
 		// Rotates The knife Sprite by 0.1f
 		var collision = MoveAndCollide(Velocity * (float)delta);
 		if (velocity.Length() > 0) {
-			GetNode<Sprite2D>("KnifeSprite").Rotate(velocity.Length()/10*(float)0.005f);
+			this.Rotate(Velocity.X/10*(float)0.005f);
 		}
 		if (collision != null) {
 			FallProgress = 0;
@@ -74,7 +77,7 @@ public partial class knifeCharacter : CharacterBody2D
 			Velocity = Velocity.Slide(collision.GetNormal())*(float)0.5;
 		}
 		
-		
+		_on_area_2d_body_entered(map)
 	}
 	void OnMouseDown()
 	{
@@ -121,5 +124,7 @@ public partial class knifeCharacter : CharacterBody2D
 	
 	
 	}
-
+	private void _on_area_2d_body_entered(TileMap map) {
+		map.SetCell(0, map.LocalToMap(Position) + new Vector2I(0,1), 0,new Vector2I(0,0));
+	}
 }
