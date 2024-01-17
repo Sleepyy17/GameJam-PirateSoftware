@@ -16,6 +16,57 @@ public partial class knifeCharacter : CharacterBody2D
 
 	int Gravity = 100;
 
+	public void _on_blade_area_body_entered(TileMap body)
+	{
+		 GD.Print(this.Name + " blade collided with " + body.Name);
+		 if (body is TileMap)
+        {
+            // Get the cell coordinates where the collision occurred
+			var collision = GetSlideCollision(0);
+			Vector2 colpos = collision.GetPosition();
+			colpos = GetClosestCell(body, body.LocalToMap(colpos));
+	
+            //Vector2I cellPosition = body.LocalToMap(colpos);
+			
+			var customData = (TileData)body.GetCellTileData(0, (Vector2I)colpos);
+			GD.Print(customData);
+            // Check for the custom property in the tileset
+            // int tileId = ((TileMap)body).GetCell(cellPosition);
+            // TileSet tileset = ((TileMap)body).TileSet;
+            bool customDataBool = (bool)customData.GetCustomData("Lava");
+			GD.Print(customDataBool);
+
+            if (customDataBool)
+            {
+                // Game over logic
+                GD.Print("Game Over!");
+            }
+		}
+	}
+
+	public Vector2I GetClosestCell(TileMap tileMap, Vector2 position)
+	{
+    	Vector2I closestCell = new Vector2I();
+    	float smallestDistance = float.MaxValue;
+
+    	foreach (Vector2I cell in tileMap.GetUsedCells(0))
+    	{
+        	float distance = position.DistanceTo(cell);
+
+        	if (distance < smallestDistance)
+        	{
+           		smallestDistance = distance;
+            	closestCell = cell;
+        	}
+    	}
+		GD.Print(closestCell);
+    	return closestCell;
+	}
+
+	public void _on_handle_area_body_entered(TileMap body)
+	{
+		 GD.Print(this.Name + " handle collided with " + body.Name);
+	}
 
 	public override void _Ready()
 	{
@@ -68,7 +119,7 @@ public partial class knifeCharacter : CharacterBody2D
 		
 		// Rotates The knife Sprite by 0.1f
 		if (velocity.Length() > 0.1f && !IsOnFloor() && !IsOnWall()) {
-			GetNode<Sprite2D>("KnifeSprite").Rotate(0.1f);
+			this.Rotate(0.1f);
 		}
 		MoveAndSlide();
 		
@@ -94,7 +145,6 @@ public partial class knifeCharacter : CharacterBody2D
 		throwForce = (mousePosition - position).Length();
 		if (throwForce > 300f) throwForce = 300f;
 		throwVector = -(mousePosition - position).Normalized();
-		GD.Print(throwVector);
 
 	}
 
@@ -115,7 +165,7 @@ public partial class knifeCharacter : CharacterBody2D
 		// add velocity to the knife
 		//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
 		Velocity = throwVector * throwForce * 2;
-		GetNode<Sprite2D>("KnifeSprite").Rotate(0.1f);
+		this.Rotate(0.1f);
 	
 	
 	}
