@@ -5,7 +5,7 @@ using System;
 public partial class testPlayer : CharacterBody2D
 {
 	[Export]
-    public int Speed { get; set; } = 20000;
+	public int Speed { get; set; } = 20000;
 	public int Gravity { get; set; } = 30000;
 	public float Friction { get; set; } = 0.1f;
 	public float Acceleration { get; set; } = 0.5f;
@@ -83,7 +83,7 @@ public partial class testPlayer : CharacterBody2D
 /////////////////////////////////////////////////////////////////
 ///
 
-    public void GetInput(float delta) {
+	public void GetInput(float delta) {
 
 		if (IsOnFloor() || IsOnWall()) {
 			FallProgress = 0;
@@ -105,14 +105,14 @@ public partial class testPlayer : CharacterBody2D
 		}
 		// jump
 		if (Input.IsActionJustPressed("up") && (IsOnFloor() || IsOnWall()) && !IsJumping) {
-        	IsJumping = true;
-        	JumpProgress = 0f;
-    	}
+			IsJumping = true;
+			JumpProgress = 0f;
+		}
 
-    	if (IsJumping) {
-        	JumpProgress += delta;
-        	float t = 0.25f - JumpProgress;
-        	velocity.Y = -JumpHeight * (0.25f - (0.25f - t));
+		if (IsJumping) {
+			JumpProgress += delta;
+			float t = 0.25f - JumpProgress;
+			velocity.Y = -JumpHeight * (0.25f - (0.25f - t));
 			if (JumpProgress >= 0.25f) {
 				IsJumping = false;
 				FallProgress = 0;
@@ -124,13 +124,13 @@ public partial class testPlayer : CharacterBody2D
 			velocity.Y += FallProgress * Gravity * delta * 4;
 
 		}
-    	Velocity = velocity;
-    }
+		Velocity = velocity;
+	}
 
 
-    public override void _PhysicsProcess(double delta) {
+	public override void _PhysicsProcess(double delta) {
 
-        GetInput((float)delta);
-        MoveAndSlide();
-    }
+		GetInput((float)delta);
+		MoveAndSlide();
+	}
 }

@@ -103,7 +103,7 @@ public partial class knifeCharacter : CharacterBody2D
 	void ThrowKnife()
 	{
 		// add velocity to the knife
-    	//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
+		//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
 		Velocity = throwVector * throwForce * 2;
 	}
 
