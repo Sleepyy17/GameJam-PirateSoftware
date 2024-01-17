@@ -67,7 +67,7 @@ public partial class knifeCharacter : CharacterBody2D
 		
 		// Rotates The knife Sprite by 0.1f
 		if (velocity.Length() > 0.1f) {
-			GetNode<Sprite2D>("Knife").Rotate(0.1f);
+			GetNode<Sprite2D>("KnifeSprite").Rotate(0.1f);
 		}
 		MoveAndSlide();
 		
@@ -114,7 +114,7 @@ public partial class knifeCharacter : CharacterBody2D
 		// add velocity to the knife
 		//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
 		Velocity = throwVector * throwForce * 2;
-		GetNode<Sprite2D>("Knife").Rotate(0.1f);
+		GetNode<Sprite2D>("KnifeSprite").Rotate(0.1f);
 	
 	
 	}

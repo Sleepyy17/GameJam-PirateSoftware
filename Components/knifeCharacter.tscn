@@ -15,7 +15,7 @@ script = ExtResource("1_2y3ja")
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_1ymu1")
 
-[node name="Knife" type="Sprite2D" parent="."]
+[node name="KnifeSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_manot")
 script = ExtResource("3_2yqb2")
