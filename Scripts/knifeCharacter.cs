@@ -56,7 +56,6 @@ public partial class knifeCharacter : CharacterBody2D
 			if (isInAir == false)
 			{
 				velocity.X = 0;
-				GetNode<AnimationPlayer>("Knife/AnimationPlayer").Stop();
 				
 			}
 			isInAir = false;
@@ -65,6 +64,10 @@ public partial class knifeCharacter : CharacterBody2D
 		velocity.Y += FallProgress * Gravity * (float)delta*10;
 		//Velocity = rigidBody.LinearVelocity;
 		Velocity = velocity;
+		
+		if (velocity.Length() > 0.1f) {
+			GetNode<Sprite2D>("Knife").Rotate(0.1f);
+		}
 		MoveAndSlide();
 		
 		
@@ -110,7 +113,9 @@ public partial class knifeCharacter : CharacterBody2D
 		// add velocity to the knife
 		//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
 		Velocity = throwVector * throwForce * 2;
-		GetNode<AnimationPlayer>("Knife/AnimationPlayer").Play("spinClockwise");
+		GetNode<Sprite2D>("Knife").Rotate(0.1f);
+		
+	
 	}
 
 }
