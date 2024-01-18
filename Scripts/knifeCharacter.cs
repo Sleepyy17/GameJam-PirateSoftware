@@ -16,6 +16,10 @@ public partial class knifeCharacter : CharacterBody2D
 
 	int Gravity = 100;
 
+	bool stuckToWall = false;
+	bool isRotating = false;
+
+
 	public void _on_blade_area_body_entered(TileMap body)
 	{
 		 GD.Print(this.Name + " blade collided with " + body.Name);
@@ -40,6 +44,7 @@ public partial class knifeCharacter : CharacterBody2D
             {
                 // Game over logic
                 GD.Print("Game Over!");
+				GetTree().ReloadCurrentScene();
             }
 		}
 	}
@@ -75,7 +80,7 @@ public partial class knifeCharacter : CharacterBody2D
 		rigidBody.GravityScale = 0;
 	}
 
-	public override void _Process(double delta)
+	public override async void _Process(double delta)
 	{
 		// if mouse down do function
 
@@ -107,9 +112,11 @@ public partial class knifeCharacter : CharacterBody2D
 			if (isInAir == false)
 			{
 				velocity.X = 0;
+				velocity.Y = 10;
 				
 			}
 			isInAir = false;
+		    isRotating = false;
 		}
 		//test
 		FallProgress += (float)delta;
@@ -119,7 +126,15 @@ public partial class knifeCharacter : CharacterBody2D
 		
 		// Rotates The knife Sprite by 0.1f
 		if (velocity.Length() > 0.1f && !IsOnFloor() && !IsOnWall()) {
-			this.Rotate(0.1f);
+			if (isRotating) 
+			{
+				this.Rotate(0.1f);
+			}
+			else 
+			{
+				await ToSignal(GetTree().CreateTimer(0.01), "timeout"); // Connect the timeout signal to the OnTimerTimeout method
+				isRotating = true;
+			}
 		}
 		MoveAndSlide();
 		
@@ -165,9 +180,12 @@ public partial class knifeCharacter : CharacterBody2D
 		// add velocity to the knife
 		//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
 		Velocity = throwVector * throwForce * 2;
-		this.Rotate(0.1f);
+		//this.Rotate(0.1f);
 	
 	
 	}
-
+	public void OnTimerTimeoutRotate()
+	{
+    	this.Rotate(0.1f);
+	}
 }
