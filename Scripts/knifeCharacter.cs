@@ -76,8 +76,7 @@ public partial class knifeCharacter : CharacterBody2D
 			isInAir = false;
 			Velocity = Velocity.Slide(collision.GetNormal())*(float)0.5;
 		}
-		
-		_on_area_2d_body_entered(map)
+
 	}
 	void OnMouseDown()
 	{
@@ -120,7 +119,7 @@ public partial class knifeCharacter : CharacterBody2D
 		// add velocity to the knife
 		//rigidBody.ApplyImpulse(Vector2.Zero, throwVector * throwForce);
 		Velocity = throwVector * throwForce * 2;
-		GetNode<Sprite2D>("KnifeSprite").Rotate(0.1f);
+		// GetNode<Sprite2D>("KnifeSprite").Rotate(0.1f);
 	
 	
 	}

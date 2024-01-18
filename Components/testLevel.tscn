@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhynmw6ujdbie"]
+[gd_scene load_steps=6 format=3 uid="uid://b55uhn4wh4vj2"]
 
 [ext_resource type="PackedScene" uid="uid://dlct3j6ri5wbj" path="res://Components/testPlayer.tscn" id="2_uli1g"]
 [ext_resource type="PackedScene" uid="uid://cb3uruvndmmvx" path="res://Components/knifeCharacter.tscn" id="3_x37yf"]
-[ext_resource type="Texture2D" uid="uid://d84p1xnnwwt0" path="res://Hills.png" id="4_3i2dt"]
+[ext_resource type="Texture2D" path="res://Hills.png" id="4_3i2dt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rwctc"]
 texture = ExtResource("4_3i2dt")
