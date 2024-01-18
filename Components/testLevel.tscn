@@ -39,5 +39,5 @@ layer_0/tile_data = PackedInt32Array(1966080, 0, 0, 1966081, 0, 0, 1966082, 0, 0
 scale = Vector2(0.315, 0.315)
 
 [node name="Knife" parent="." instance=ExtResource("3_x37yf")]
-position = Vector2(420, 119)
+position = Vector2(363, 122)
 scale = Vector2(0.439024, 0.439024)

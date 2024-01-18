@@ -125,29 +125,33 @@ public partial class knifeCharacter : CharacterBody2D
 		
 		MoveAndSlide();
 		// Rotates The knife Sprite by 0.1f
-		if (velocity.Length() > 0.1f && !IsOnFloor() && !IsOnWall()) {
-			if (isRotating) 
-			{
-				this.Rotate(0.1f);
-			}
-			else 
-			{
-				await ToSignal(GetTree().CreateTimer(0.01), "timeout"); // Connect the timeout signal to the OnTimerTimeout method
-				isRotating = true;
-			}
+
+		// && isInAir
+		if (velocity.Length() > 0.1f) {
+			//if (isRotating) 
+			//{
+				this.Rotate(Velocity.X/10*(float)0.005f);
+
+			//}
+			// else 
+			// {
+			// 	await ToSignal(GetTree().CreateTimer(0.01), "timeout"); // Connect the timeout signal to the OnTimerTimeout method
+			// 	isRotating = true;
+			// }
 		}
 		var collision = GetSlideCollision(GetSlideCollisionCount() - 1);
 		if (collision != null) {
 			FallProgress = 0;
 			if (isInAir == false)
 			{
-				//velocity.X = 0;
+				velocity.X = 0;
 				//velocity.Y = 10;
 				
 			}
 			isInAir = false;
 			isRotating = false;
-			Velocity = Velocity.Slide(collision.GetNormal())*(float)0.5;
+			Velocity = velocity;
+			Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
 		}
 
 		
