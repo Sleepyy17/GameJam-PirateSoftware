@@ -19,6 +19,8 @@ public partial class knifeCharacter : CharacterBody2D
 
 	int Gravity = 100;
 
+	KinematicCollision2D lastCollision = null;
+
 
 	public override void _Ready()
 	{
@@ -63,8 +65,10 @@ public partial class knifeCharacter : CharacterBody2D
 		
 		// Rotates The knife Sprite by 0.1f
 		var collision = MoveAndCollide(Velocity * (float)delta);
+		lastCollision = collision;
 		if (velocity.Length() > 0) {
 			this.Rotate(Velocity.X/10*(float)0.005f);
+			//MathF.Abs(Velocity.Y/50)
 		}
 		if (collision != null) {
 			FallProgress = 0;
@@ -123,7 +127,49 @@ public partial class knifeCharacter : CharacterBody2D
 	
 	
 	}
-	private void _on_area_2d_body_entered(TileMap map) {
-		map.SetCell(0, map.LocalToMap(Position) + new Vector2I(0,1), 0,new Vector2I(0,0));
+	private void _on_area_2d_body_entered(TileMap body) {
+		GD.Print(this.Name + " blade collided with " + body.Name);
+		if (body is TileMap)
+        {
+            // Get the cell coordinates where the collision occurred
+			Vector2 colpos = lastCollision.GetPosition();
+			colpos = GetClosestCell(body, body.LocalToMap(colpos));
+	
+            //Vector2I cellPosition = body.LocalToMap(colpos);
+			
+			var customData = (TileData)body.GetCellTileData(0, (Vector2I)colpos);
+			GD.Print(customData);
+            // Check for the custom property in the tileset
+            // int tileId = ((TileMap)body).GetCell(cellPosition);
+            // TileSet tileset = ((TileMap)body).TileSet;
+            bool customDataBool = (bool)customData.GetCustomData("Lava");
+			GD.Print(customDataBool);
+
+            if (customDataBool)
+            {
+                // Game over logic
+                GD.Print("Game Over!");
+				GetTree().ReloadCurrentScene();
+            }
+		}
+	}
+
+	public Vector2I GetClosestCell(TileMap tileMap, Vector2 position)
+	{
+    	Vector2I closestCell = new Vector2I();
+    	float smallestDistance = float.MaxValue;
+
+    	foreach (Vector2I cell in tileMap.GetUsedCells(0))
+    	{
+        	float distance = position.DistanceTo(cell);
+
+        	if (distance < smallestDistance)
+        	{
+           		smallestDistance = distance;
+            	closestCell = cell;
+        	}
+    	}
+		GD.Print(closestCell);
+    	return closestCell;
 	}
 }
