@@ -7,6 +7,7 @@ public partial class knifeCharacter : CharacterBody2D
 	float throwForce;
 	RigidBody2D rigidBody;
 	Line2D line;
+	private Texture2D knifeWithButter;
 
 	bool mouseWasReleased = true;
 
@@ -24,48 +25,51 @@ public partial class knifeCharacter : CharacterBody2D
 	{
 		 GD.Print(this.Name + " blade collided with " + body.Name);
 		 if (body is TileMap)
-        {
-            // Get the cell coordinates where the collision occurred
+		{
+			// Get the cell coordinates where the collision occurred
 			var collision = GetSlideCollision(0);
 			Vector2 colpos = collision.GetPosition();
 			colpos = GetClosestCell(body, body.LocalToMap(colpos));
 	
-            //Vector2I cellPosition = body.LocalToMap(colpos);
+			//Vector2I cellPosition = body.LocalToMap(colpos);
 			
 			var customData = (TileData)body.GetCellTileData(0, (Vector2I)colpos);
 			GD.Print(customData);
-            // Check for the custom property in the tileset
-            // int tileId = ((TileMap)body).GetCell(cellPosition);
-            // TileSet tileset = ((TileMap)body).TileSet;
-            bool customDataBool = (bool)customData.GetCustomData("Lava");
+			// Check for the custom property in the tileset
+			// int tileId = ((TileMap)body).GetCell(cellPosition);
+			// TileSet tileset = ((TileMap)body).TileSet;
+			bool customDataBool = (bool)customData.GetCustomData("Lava");
 			GD.Print(customDataBool);
-
-            if (customDataBool)
-            {
-                // Game over logic
-                GD.Print("Game Over!");
-				GetTree().ReloadCurrentScene();
-            }
+			
+			if (customDataBool)
+			{
+				// Game over logic
+				GD.Print("Game Over!");
+				// GetTree().ReloadCurrentScene();
+				GetNode<Sprite2D>("KnifeSprite").Texture = knifeWithButter;
+				
+				
+			}
 		}
 	}
 
 	public Vector2I GetClosestCell(TileMap tileMap, Vector2 position)
 	{
-    	Vector2I closestCell = new Vector2I();
-    	float smallestDistance = float.MaxValue;
+		Vector2I closestCell = new Vector2I();
+		float smallestDistance = float.MaxValue;
 
-    	foreach (Vector2I cell in tileMap.GetUsedCells(0))
-    	{
-        	float distance = position.DistanceTo(cell);
+		foreach (Vector2I cell in tileMap.GetUsedCells(0))
+		{
+			float distance = position.DistanceTo(cell);
 
-        	if (distance < smallestDistance)
-        	{
-           		smallestDistance = distance;
-            	closestCell = cell;
-        	}
-    	}
+			if (distance < smallestDistance)
+			{
+		   		smallestDistance = distance;
+				closestCell = cell;
+			}
+		}
 		GD.Print(closestCell);
-    	return closestCell;
+		return closestCell;
 	}
 
 	public void _on_handle_area_body_entered(TileMap body)
@@ -78,6 +82,8 @@ public partial class knifeCharacter : CharacterBody2D
 		rigidBody = GetNode<RigidBody2D>("RigidBody2D");
 		line = GetNode<Line2D>("Line2D");
 		rigidBody.GravityScale = 0;
+		knifeWithButter = (Texture2D)ResourceLoader.Load("res://knifeButteredUp.png");
+		
 	}
 
 	public override async void _Process(double delta)
@@ -116,7 +122,7 @@ public partial class knifeCharacter : CharacterBody2D
 				
 			}
 			isInAir = false;
-		    isRotating = false;
+			isRotating = false;
 		}
 		//test
 		FallProgress += (float)delta;
@@ -186,6 +192,6 @@ public partial class knifeCharacter : CharacterBody2D
 	}
 	public void OnTimerTimeoutRotate()
 	{
-    	this.Rotate(0.1f);
+		this.Rotate(0.1f);
 	}
 }
