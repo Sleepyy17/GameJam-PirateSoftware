@@ -38,5 +38,6 @@ polygon = PackedVector2Array(-37, 31, -16, 11, -10, 17, -31, 38)
 zoom = Vector2(2.5, 2.5)
 
 [connection signal="body_entered" from="BladeArea" to="." method="_on_blade_area_body_entered"]
+[connection signal="body_exited" from="BladeArea" to="." method="_on_blade_area_body_exited"]
 [connection signal="body_entered" from="HandleArea" to="." method="_on_handle_area_body_entered"]
 [connection signal="body_exited" from="HandleArea" to="." method="_on_handle_area_body_exited"]

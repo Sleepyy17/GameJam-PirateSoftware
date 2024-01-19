@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Data.Common;
+using System.Runtime.Serialization;
 
 public partial class knifeCharacter : CharacterBody2D
 {
@@ -10,6 +12,9 @@ public partial class knifeCharacter : CharacterBody2D
 	private Texture2D knifeWithButter;
 	
 
+//////////////////////////////////////////
+//////////// VARIABLES ///////////////////
+//////////////////////////////////////////
 	bool mouseWasReleased = true;
 
 	bool isInAir = false;
@@ -22,8 +27,17 @@ public partial class knifeCharacter : CharacterBody2D
 	bool isRotating = false;
 	bool isHandleAreaContact = false;
 
+	bool ifJamOn = false;
+	bool ifPeanutOn = false;
+
+	bool isBladeOnNonStick = false;
+
+	bool isBladeOnNormal = false;
 
 
+////////////////////////////////////////////////////
+//////////// SIGNALS FUNCTIONS /////////////////////
+////////////////////////////////////////////////////
 	public void _on_blade_area_body_entered(TileMap body)
 	{
 		 GD.Print(this.Name + " blade collided with " + body.Name);
@@ -41,55 +55,49 @@ public partial class knifeCharacter : CharacterBody2D
 			// Check for the custom property in the tileset
 			// int tileId = ((TileMap)body).GetCell(cellPosition);
 			// TileSet tileset = ((TileMap)body).TileSet;
-			bool customDataBool = (bool)customData.GetCustomData("Lava");
-			GD.Print(customDataBool);
+			bool touchedLava = (bool)customData.GetCustomData("Lava");
+			GD.Print(touchedLava);
+			bool touchedNonStick = (bool)customData.GetCustomData("NonStick");
+			bool touchedNormal = (bool)customData.GetCustomData("Normal");
 			
-			if (customDataBool)
+			if (touchedLava)
 			{
 				// Game over logic
 				GD.Print("Game Over!");
 				// GetTree().ReloadCurrentScene();
 				GetNode<Sprite2D>("KnifeSprite").Texture = knifeWithButter;
-				
-				
+				ifPeanutOn = true;
+			}
+			if (touchedNonStick) {
+				isBladeOnNonStick = true;
+			}
+			if (touchedNormal) {
+				isBladeOnNormal = true;
 			}
 		}
 	}
-
-	public Vector2I GetClosestCell(TileMap tileMap, Vector2 position)
-	{
-		Vector2I closestCell = new Vector2I();
-		float smallestDistance = float.MaxValue;
-
-		foreach (Vector2I cell in tileMap.GetUsedCells(0))
-		{
-			float distance = position.DistanceTo(cell);
-
-			if (distance < smallestDistance)
-			{
-		   		smallestDistance = distance;
-				closestCell = cell;
-			}
-		}
-		GD.Print(closestCell);
-		return closestCell;
+	
+	public void _on_blade_area_body_exited(TileMap body) {
+		GD.Print(this.Name + " handle exited from " + body.Name);
+		resetCollisionVariables();
 	}
+
 
 	public void _on_handle_area_body_entered(TileMap body)
 	{
-		 GD.Print(this.Name + " handle collided with " + body.Name);
+		GD.Print(this.Name + " handle collided with " + body.Name);
 		isHandleAreaContact = true;
-		
-		
-		
 	}
 	// dasdsad
 	private void _on_handle_area_body_exited(TileMap body)
-{
+	{
 		GD.Print(this.Name + " handle exited from " + body.Name);
 		isHandleAreaContact = false;
-}
+	}
 
+/////////////////////////////////////////////////
+//////////// MAIN FUNCTIONS /////////////////////
+/////////////////////////////////////////////////
 	public override void _Ready()
 	{
 		rigidBody = GetNode<RigidBody2D>("RigidBody2D");
@@ -104,6 +112,7 @@ public partial class knifeCharacter : CharacterBody2D
 	{
 		// if mouse down do function
 
+///////////////////// MOUSE MOVEMENT //////////////////////////
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
 			if (mouseWasReleased)
@@ -126,6 +135,7 @@ public partial class knifeCharacter : CharacterBody2D
 		}
 
 
+////////// HANDLE GRAVITY /////////////////////
 		Vector2 velocity = Velocity;
 
 		//test
@@ -135,13 +145,14 @@ public partial class knifeCharacter : CharacterBody2D
 		Velocity = velocity;
 		
 		MoveAndSlide();
-		// Rotates The knife Sprite by 0.1f
 
+////////// HANDLE ROTATION /////////////////////
+		// Rotates The knife Sprite by 0.1f
 		// && isInAir
 		if (velocity.Length() > 0.1f) {
 			//if (isRotating) 
 			//{
-				this.Rotate(Velocity.X/10*(float)0.005f*FallProgress);
+			this.Rotate(Velocity.X/10*(float)0.005f*FallProgress);
 
 			//}
 			// else 
@@ -150,20 +161,29 @@ public partial class knifeCharacter : CharacterBody2D
 			// 	isRotating = true;
 			// }
 		}
+
+////////// HANDLE COLLISION /////////////////////
 		var collision = GetSlideCollision(GetSlideCollisionCount() - 1);
 		
 		
+		GD.Print($"isHandle: {isHandleAreaContact}, IsBladeOnNonStick: {isBladeOnNonStick}, IsBladeOnNormal: {isBladeOnNormal}");
 		if (collision != null) {
 			FallProgress = 0;
-			if (isInAir == false)
-			{	
-				if (isHandleAreaContact == true) {
-					velocity.Y = 10;
+			// print isHandle, IsBladeOnNonStick, IsBladeOnNormal;
+			
+			if (isHandleAreaContact == true) {
+				velocity.Y = 50;
+			}
+			if (isBladeOnNonStick == true) {
+				velocity.Y = 100;
+				if (ifPeanutOn) 
+				{
+					velocity.Y = 0;
 				}
-						
+			}
+			if (isBladeOnNormal == true) {
 				velocity.X = 0;
-				
-				
+				velocity.Y = 0;
 			}
 			isInAir = false;
 			isRotating = false;
@@ -171,11 +191,14 @@ public partial class knifeCharacter : CharacterBody2D
 			Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
 			
 		}
-	
-		
-		
 		
 	}
+
+
+/////////////////////////////////////////////////////////
+//////////// MOVEMENT BASED HELPERS /////////////////////
+/////////////////////////////////////////////////////////
+	
 	void OnMouseDown()
 	{
 		CalculateThrowVector();
@@ -220,10 +243,45 @@ public partial class knifeCharacter : CharacterBody2D
 	
 	
 	}
+
+/////////////////////////////////////////////////////////
+//////////// COLLISION BASED HELPERS /////////////////////
+/////////////////////////////////////////////////////////
+	void resetCollisionVariables() {
+		isBladeOnNonStick = false;
+		//isHandleAreaContact = false;
+		isBladeOnNormal = false;
+		stuckToWall = false;
+	}
+
+	public Vector2I GetClosestCell(TileMap tileMap, Vector2 position)
+	{
+		Vector2I closestCell = new Vector2I();
+		float smallestDistance = float.MaxValue;
+
+		foreach (Vector2I cell in tileMap.GetUsedCells(0))
+		{
+			float distance = position.DistanceTo(cell);
+
+			if (distance < smallestDistance)
+			{
+		   		smallestDistance = distance;
+				closestCell = cell;
+			}
+		}
+		GD.Print(closestCell);
+		return closestCell;
+	}
+
+
+//////////////////////////////////////////
+//////////// OTHER ///////////////////////
+//////////////////////////////////////////
 	public void OnTimerTimeoutRotate()
 	{
 		this.Rotate(0.1f);
 	}
+
 }
 
 
