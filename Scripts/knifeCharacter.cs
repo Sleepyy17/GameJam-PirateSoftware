@@ -104,7 +104,7 @@ public partial class knifeCharacter : CharacterBody2D
 		line = GetNode<Line2D>("Line2D");
 		rigidBody.GravityScale = 0;
 		knifeWithButter = (Texture2D)ResourceLoader.Load("res://knifeButteredUp.png");
-		
+		ifJamOn = false;
 		
 	}
 
@@ -165,33 +165,31 @@ public partial class knifeCharacter : CharacterBody2D
 ////////// HANDLE COLLISION /////////////////////
 		var collision = GetSlideCollision(GetSlideCollisionCount() - 1);
 		
-		
+		// isHandle -> Jam ->  
 		GD.Print($"isHandle: {isHandleAreaContact}, IsBladeOnNonStick: {isBladeOnNonStick}, IsBladeOnNormal: {isBladeOnNormal}");
 		if (collision != null) {
 			FallProgress = 0;
 			// print isHandle, IsBladeOnNonStick, IsBladeOnNormal;
-			
-			if (isHandleAreaContact == true) {
-				velocity.Y = 50;
-			}
-			if (isBladeOnNonStick == true) {
+			Velocity = velocity;
+			if (isHandleAreaContact) {	
+				Velocity = Velocity.Bounce(collision.GetNormal())*(float)0.2;
+			} else if (ifJamOn) {
+				Velocity = Velocity.Bounce(collision.GetNormal())*(float)0.4;
+			} else if (isBladeOnNonStick == true) {
 				velocity.Y = 100;
 				if (ifPeanutOn) 
 				{
 					velocity.Y = 0;
 				}
-			}
-			if (isBladeOnNormal == true) {
+				Velocity = velocity;
+				Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
+			} else if (isBladeOnNormal == true) {
 				velocity.X = 0;
 				velocity.Y = 0;
-			}
-			isInAir = false;
-			isRotating = false;
-			Velocity = velocity;
-			Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
-			
+				Velocity = velocity;
+				Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
+			} 
 		}
-		
 	}
 
 
