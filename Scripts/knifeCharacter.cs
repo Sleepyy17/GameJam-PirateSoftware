@@ -45,7 +45,13 @@ public partial class knifeCharacter : CharacterBody2D
 		{
 			// Get the cell coordinates where the collision occurred
 			var collision = GetSlideCollision(0);
+			if (collision == null) {
+				GD.Print("NULLCASE");
+				isBladeOnNormal = true;
+				return;
+			}
 			Vector2 colpos = collision.GetPosition();
+
 			colpos = GetClosestCell(body, body.LocalToMap(colpos));
 	
 			//Vector2I cellPosition = body.LocalToMap(colpos);
@@ -56,7 +62,6 @@ public partial class knifeCharacter : CharacterBody2D
 			// int tileId = ((TileMap)body).GetCell(cellPosition);
 			// TileSet tileset = ((TileMap)body).TileSet;
 			bool touchedLava = (bool)customData.GetCustomData("Lava");
-			GD.Print(touchedLava);
 			bool touchedNonStick = (bool)customData.GetCustomData("NonStick");
 			bool touchedNormal = (bool)customData.GetCustomData("Normal");
 			
@@ -69,9 +74,15 @@ public partial class knifeCharacter : CharacterBody2D
 				ifPeanutOn = true;
 			}
 			if (touchedNonStick) {
+				GD.Print("NonStick");
 				isBladeOnNonStick = true;
 			}
 			if (touchedNormal) {
+				GD.Print("Normal");
+				isBladeOnNormal = true;
+			}
+			else {
+				GD.Print("Normal Backup");
 				isBladeOnNormal = true;
 			}
 		}
@@ -152,7 +163,7 @@ public partial class knifeCharacter : CharacterBody2D
 		if (velocity.Length() > 0.1f) {
 			//if (isRotating) 
 			//{
-			this.Rotate(Velocity.X/10*(float)0.005f*FallProgress);
+			this.Rotate(Velocity.X/20*MathF.Sqrt(FallProgress*20)*(float)0.005f);
 
 			//}
 			// else 
@@ -166,7 +177,7 @@ public partial class knifeCharacter : CharacterBody2D
 		var collision = GetSlideCollision(GetSlideCollisionCount() - 1);
 		
 		// isHandle -> Jam ->  
-		GD.Print($"isHandle: {isHandleAreaContact}, IsBladeOnNonStick: {isBladeOnNonStick}, IsBladeOnNormal: {isBladeOnNormal}");
+		//GD.Print($"isHandle: {isHandleAreaContact}, IsBladeOnNonStick: {isBladeOnNonStick}, IsBladeOnNormal: {isBladeOnNormal}");
 		if (collision != null) {
 			FallProgress = 0;
 			// print isHandle, IsBladeOnNonStick, IsBladeOnNormal;
@@ -176,18 +187,19 @@ public partial class knifeCharacter : CharacterBody2D
 			} else if (ifJamOn) {
 				Velocity = Velocity.Bounce(collision.GetNormal())*(float)0.4;
 			} else if (isBladeOnNonStick == true) {
+				//velocity.X = 0;
 				velocity.Y = 100;
 				if (ifPeanutOn) 
 				{
 					velocity.Y = 0;
 				}
 				Velocity = velocity;
-				Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
+				//Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
 			} else if (isBladeOnNormal == true) {
 				velocity.X = 0;
 				velocity.Y = 0;
 				Velocity = velocity;
-				Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
+				//Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
 			} 
 		}
 	}
