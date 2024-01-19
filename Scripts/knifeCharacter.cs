@@ -83,7 +83,7 @@ public partial class knifeCharacter : CharacterBody2D
 		
 		
 	}
-	
+	// dasdsad
 	private void _on_handle_area_body_exited(TileMap body)
 {
 		GD.Print(this.Name + " handle exited from " + body.Name);
@@ -141,7 +141,7 @@ public partial class knifeCharacter : CharacterBody2D
 		if (velocity.Length() > 0.1f) {
 			//if (isRotating) 
 			//{
-				this.Rotate(Velocity.X/10*(float)0.005f);
+				this.Rotate(Velocity.X/10*(float)0.005f*FallProgress);
 
 			//}
 			// else 
