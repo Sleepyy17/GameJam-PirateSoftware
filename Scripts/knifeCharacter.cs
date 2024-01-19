@@ -8,6 +8,7 @@ public partial class knifeCharacter : CharacterBody2D
 	RigidBody2D rigidBody;
 	Line2D line;
 	private Texture2D knifeWithButter;
+	
 
 	bool mouseWasReleased = true;
 
@@ -19,6 +20,8 @@ public partial class knifeCharacter : CharacterBody2D
 
 	bool stuckToWall = false;
 	bool isRotating = false;
+	bool isHandleAreaContact = false;
+
 
 
 	public void _on_blade_area_body_entered(TileMap body)
@@ -75,7 +78,17 @@ public partial class knifeCharacter : CharacterBody2D
 	public void _on_handle_area_body_entered(TileMap body)
 	{
 		 GD.Print(this.Name + " handle collided with " + body.Name);
+		isHandleAreaContact = true;
+		
+		
+		
 	}
+	
+	private void _on_handle_area_body_exited(TileMap body)
+{
+		GD.Print(this.Name + " handle exited from " + body.Name);
+		isHandleAreaContact = false;
+}
 
 	public override void _Ready()
 	{
@@ -84,9 +97,10 @@ public partial class knifeCharacter : CharacterBody2D
 		rigidBody.GravityScale = 0;
 		knifeWithButter = (Texture2D)ResourceLoader.Load("res://knifeButteredUp.png");
 		
+		
 	}
 
-	public override async void _Process(double delta)
+	public override void _Process(double delta)
 	{
 		// if mouse down do function
 
@@ -114,9 +128,6 @@ public partial class knifeCharacter : CharacterBody2D
 
 		Vector2 velocity = Velocity;
 
-
-
-
 		//test
 		FallProgress += (float)delta;
 		velocity.Y += FallProgress * Gravity * (float)delta*10;
@@ -140,20 +151,28 @@ public partial class knifeCharacter : CharacterBody2D
 			// }
 		}
 		var collision = GetSlideCollision(GetSlideCollisionCount() - 1);
+		
+		
 		if (collision != null) {
 			FallProgress = 0;
 			if (isInAir == false)
-			{
+			{	
+				if (isHandleAreaContact == true) {
+					velocity.Y = 10;
+				}
+						
 				velocity.X = 0;
-				//velocity.Y = 10;
+				
 				
 			}
 			isInAir = false;
 			isRotating = false;
 			Velocity = velocity;
 			Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
+			
 		}
-
+	
+		
 		
 		
 	}
@@ -206,3 +225,6 @@ public partial class knifeCharacter : CharacterBody2D
 		this.Rotate(0.1f);
 	}
 }
+
+
+

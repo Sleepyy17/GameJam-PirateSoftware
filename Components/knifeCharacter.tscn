@@ -39,3 +39,4 @@ zoom = Vector2(2.5, 2.5)
 
 [connection signal="body_entered" from="BladeArea" to="." method="_on_blade_area_body_entered"]
 [connection signal="body_entered" from="HandleArea" to="." method="_on_handle_area_body_entered"]
+[connection signal="body_exited" from="HandleArea" to="." method="_on_handle_area_body_exited"]
