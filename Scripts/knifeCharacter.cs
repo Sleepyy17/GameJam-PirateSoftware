@@ -9,7 +9,8 @@ public partial class knifeCharacter : CharacterBody2D
 	float throwForce;
 	RigidBody2D rigidBody;
 	Line2D line;
-	private Texture2D knifeWithButter;
+	private Texture2D knifeWIthPeanut;
+	private Texture2D knifeWithJam;
 	
 
 //////////////////////////////////////////
@@ -71,8 +72,7 @@ public partial class knifeCharacter : CharacterBody2D
 				// Game over logic
 				GD.Print("Game Over!");
 				// GetTree().ReloadCurrentScene();
-				GetNode<Sprite2D>("KnifeSprite").Texture = knifeWithButter;
-				ifPeanutOn = true;
+				GetNode<Sprite2D>("KnifeSprite").Texture = knifeWIthPeanut;
 			}
 			if (touchedNonStick) {
 				GD.Print("NonStick");
@@ -117,13 +117,26 @@ public partial class knifeCharacter : CharacterBody2D
 		rigidBody = GetNode<RigidBody2D>("RigidBody2D");
 		line = GetNode<Line2D>("Line2D");
 		rigidBody.GravityScale = 0;
-		knifeWithButter = (Texture2D)ResourceLoader.Load("res://knifeButteredUp.png");
+		knifeWIthPeanut = (Texture2D)ResourceLoader.Load("res://knifeButteredUp.png");
+		knifeWithJam = (Texture2D)ResourceLoader.Load("res://knifeWithJam.png");
+
 		ifJamOn = false;
+		ifPeanutOn = false;
 		
 	}
 
 	public override void _Process(double delta)
-	{
+	{	
+		Sprite2D knifeSprite = this.GetNode("KnifeSprite") as Sprite2D;
+		if (knifeSprite.Texture == knifeWithJam) {
+			ifJamOn = true;
+			ifPeanutOn = false;
+		}
+		if (knifeSprite.Texture == knifeWIthPeanut) {
+			ifPeanutOn = true;
+			ifJamOn = false;
+		}
+		//GD.Print(ifJamOn);
 		// if mouse down do function
 
 ///////////////////// MOUSE MOVEMENT //////////////////////////
