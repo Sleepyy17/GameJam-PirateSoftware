@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://0v6aivj7thy1"]
+
+[ext_resource type="Script" path="res://jar_ofjam.cs" id="1_82hox"]
+[ext_resource type="Texture2D" uid="uid://b2i61ysfl1oyf" path="res://jam.png" id="1_pgc5s"]
+
+[node name="JarOfjam" type="Node2D"]
+position = Vector2(196, 144)
+script = ExtResource("1_82hox")
+
+[node name="Jam" type="Sprite2D" parent="."]
+position = Vector2(471, 134)
+texture = ExtResource("1_pgc5s")
+
+[node name="Area2DJam" type="Area2D" parent="."]
+
+[node name="JarCollosionBorder" type="CollisionPolygon2D" parent="Area2DJam"]
+polygon = PackedVector2Array(203, 142, 219, 142, 219, 165, 219, 196, 219, 253, 227, 254, 227, 261, 321, 263, 322, 255, 331, 254, 331, 162, 331, 142, 348, 142, 348, 150, 339, 151, 339, 254, 331, 263, 323, 270, 227, 271, 219, 262, 211, 253, 211, 150, 203, 150)
+
+[node name="Area2DCollosionBox" type="Area2D" parent="."]
+disable_mode = 2
+collision_mask = 2
+
+[node name="JamCollosionBox" type="CollisionPolygon2D" parent="Area2DCollosionBox"]
+polygon = PackedVector2Array(220, 158, 219, 253, 227, 254, 227, 260, 321, 263, 322, 255, 331, 254, 331, 158)
+
+[node name="LidCollosionBox" type="CollisionPolygon2D" parent="Area2DCollosionBox"]
+polygon = PackedVector2Array(347, 247, 347, 270, 507, 270, 507, 246, 348, 245)
+
+[connection signal="body_entered" from="Area2DJam" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2DJam" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Area2DCollosionBox" to="." method="_on_area_2d_collosion_box_body_entered"]
