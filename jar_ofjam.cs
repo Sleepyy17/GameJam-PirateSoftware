@@ -19,7 +19,7 @@ public partial class jar_ofjam : Node2D
 	private void _on_area_2d_body_entered(CharacterBody2D body)
 	{	
 		
-		Sprite2D knifeSprite = body.GetNode("KnifeSprite") as Sprite2D;;
+		Sprite2D knifeSprite = body.GetNode("KnifeSprite") as Sprite2D;
 		knifeSprite.Texture = knifeWithJam;
 	}
 	

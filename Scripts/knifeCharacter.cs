@@ -38,12 +38,13 @@ public partial class knifeCharacter : CharacterBody2D
 ////////////////////////////////////////////////////
 //////////// SIGNALS FUNCTIONS /////////////////////
 ////////////////////////////////////////////////////
-	public void _on_blade_area_body_entered(TileMap body)
+	public void _on_blade_area_body_entered(Node obj)
 	{
-		 GD.Print(this.Name + " blade collided with " + body.Name);
-		 if (body is TileMap)
+		 GD.Print(this.Name + " blade collided with " + obj.Name);
+		 if (obj is TileMap)
 		{
 			// Get the cell coordinates where the collision occurred
+			TileMap body = (TileMap) obj;
 			var collision = GetSlideCollision(0);
 			if (collision == null) {
 				GD.Print("NULLCASE");
@@ -85,24 +86,26 @@ public partial class knifeCharacter : CharacterBody2D
 				GD.Print("Normal Backup");
 				isBladeOnNormal = true;
 			}
+		} else {
+			isBladeOnNormal = true;
 		}
 	}
 	
-	public void _on_blade_area_body_exited(TileMap body) {
-		GD.Print(this.Name + " handle exited from " + body.Name);
+	public void _on_blade_area_body_exited(Node obj) {
+		GD.Print(this.Name + " handle exited from " + obj.Name);
 		resetCollisionVariables();
 	}
 
 
-	public void _on_handle_area_body_entered(TileMap body)
+	public void _on_handle_area_body_entered(Node obj)
 	{
-		GD.Print(this.Name + " handle collided with " + body.Name);
+		GD.Print(this.Name + " handle collided with " + obj.Name);
 		isHandleAreaContact = true;
 	}
 	// dasdsad
-	private void _on_handle_area_body_exited(TileMap body)
+	private void _on_handle_area_body_exited(Node obj)
 	{
-		GD.Print(this.Name + " handle exited from " + body.Name);
+		GD.Print(this.Name + " handle exited from " + obj.Name);
 		isHandleAreaContact = false;
 	}
 
