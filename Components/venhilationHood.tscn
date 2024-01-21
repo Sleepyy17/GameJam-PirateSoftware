@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c7q1v3ibcsa63"]
 
-[ext_resource type="Script" path="res://venhilationHood.cs" id="1_kue7w"]
-[ext_resource type="Texture2D" uid="uid://dlmj163jgmsl6" path="res://fan-Sheet.png" id="1_sv432"]
+[ext_resource type="Script" path="res://Scripts/venhilationHood.cs" id="1_kue7w"]
+[ext_resource type="Texture2D" uid="uid://dlmj163jgmsl6" path="res://Assets/fan-Sheet.png" id="1_sv432"]
 
 [sub_resource type="Animation" id="Animation_8a6jy"]
 resource_name = "sunction"

@@ -35,6 +35,8 @@ public partial class knifeCharacter : CharacterBody2D
 
 	bool isBladeOnNormal = false;
 
+	bool moveable = false;
+
 
 ////////////////////////////////////////////////////
 //////////// SIGNALS FUNCTIONS /////////////////////
@@ -96,7 +98,6 @@ public partial class knifeCharacter : CharacterBody2D
 		resetCollisionVariables();
 	}
 
-
 	public void _on_handle_area_body_entered(Node obj)
 	{
 		GD.Print(this.Name + " handle collided with " + obj.Name);
@@ -108,6 +109,14 @@ public partial class knifeCharacter : CharacterBody2D
 		GD.Print(this.Name + " handle exited from " + obj.Name);
 		isHandleAreaContact = false;
 	}
+
+	   public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("restart"))
+        {
+            GetTree().ReloadCurrentScene();
+        }
+    }
 
 /////////////////////////////////////////////////
 //////////// MAIN FUNCTIONS /////////////////////
@@ -140,7 +149,7 @@ public partial class knifeCharacter : CharacterBody2D
 		// if mouse down do function
 
 ///////////////////// MOUSE MOVEMENT //////////////////////////
-		if (Input.IsMouseButtonPressed(MouseButton.Left))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && moveable)
 		{
 			if (mouseWasReleased)
 			{
@@ -195,6 +204,7 @@ public partial class knifeCharacter : CharacterBody2D
 		// isHandle -> Jam ->  
 		//GD.Print($"isHandle: {isHandleAreaContact}, IsBladeOnNonStick: {isBladeOnNonStick}, IsBladeOnNormal: {isBladeOnNormal}");
 		if (collision != null) {
+			moveable = true;
 			FallProgress = 0;
 			// print isHandle, IsBladeOnNonStick, IsBladeOnNormal;
 			Velocity = velocity;
@@ -217,6 +227,8 @@ public partial class knifeCharacter : CharacterBody2D
 				Velocity = velocity;
 				//Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
 			} 
+		} else {
+			moveable = false;
 		}
 	}
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwaqca2duldm8"
-path="res://.godot/imported/Sprite-0002.png-be2d0c11222c1eca468919d34832f25a.ctex"
+uid="uid://l8d7hvp5k1it"
+path="res://.godot/imported/KitchenCounteTiles.png-276d9239df6822ed10bf23119dc930cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite-0002.png"
-dest_files=["res://.godot/imported/Sprite-0002.png-be2d0c11222c1eca468919d34832f25a.ctex"]
+source_file="res://Assets/KitchenCounteTiles.png"
+dest_files=["res://.godot/imported/KitchenCounteTiles.png-276d9239df6822ed10bf23119dc930cd.ctex"]
 
 [params]
 

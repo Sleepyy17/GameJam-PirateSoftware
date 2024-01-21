@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cb3uruvndmmvx"]
 
 [ext_resource type="Script" path="res://Scripts/knifeCharacter.cs" id="1_2y3ja"]
-[ext_resource type="Texture2D" uid="uid://bj3xblt1d3l7x" path="res://knife.png" id="2_manot"]
+[ext_resource type="Texture2D" uid="uid://bj3xblt1d3l7x" path="res://Assets/knife.png" id="2_manot"]
 [ext_resource type="Script" path="res://Scripts/KnifeSpriteAnimations.cs" id="3_2yqb2"]
 
 [node name="Knife" type="CharacterBody2D"]
@@ -33,9 +33,6 @@ polygon = PackedVector2Array(32, -36, 31, -17, 0, 14, -9, 4)
 
 [node name="HandleSideCol" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-37, 31, -16, 11, -10, 17, -31, 38)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
 
 [connection signal="body_entered" from="BladeArea" to="." method="_on_blade_area_body_entered"]
 [connection signal="body_exited" from="BladeArea" to="." method="_on_blade_area_body_exited"]

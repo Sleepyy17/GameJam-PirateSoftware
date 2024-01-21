@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7vosdgca6fq7"
-path="res://.godot/imported/mctake1.png-e5e2338646cdf7c02c009d166849556d.ctex"
+uid="uid://cd646bnkkdnwd"
+path="res://.godot/imported/SideOpenCabinent-export.png-1f22239a3283b7435b54a277a69c4a1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mctake1.png"
-dest_files=["res://.godot/imported/mctake1.png-e5e2338646cdf7c02c009d166849556d.ctex"]
+source_file="res://Assets/SideOpenCabinent-export.png"
+dest_files=["res://.godot/imported/SideOpenCabinent-export.png-1f22239a3283b7435b54a277a69c4a1f.ctex"]
 
 [params]
 

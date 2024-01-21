@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlmj163jgmsl6"
-path="res://.godot/imported/fan-Sheet.png-0c5fc15699cc6957160b52b87dfb67be.ctex"
+uid="uid://cqt1jnnjqfhjp"
+path="res://.godot/imported/knifeButteredUp.png-ddbdc22db5106acf2ed2236d2f315244.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://fan-Sheet.png"
-dest_files=["res://.godot/imported/fan-Sheet.png-0c5fc15699cc6957160b52b87dfb67be.ctex"]
+source_file="res://Assets/knifeButteredUp.png"
+dest_files=["res://.godot/imported/knifeButteredUp.png-ddbdc22db5106acf2ed2236d2f315244.ctex"]
 
 [params]
 

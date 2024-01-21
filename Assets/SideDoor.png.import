@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqt1jnnjqfhjp"
-path="res://.godot/imported/knifeButteredUp.png-f4da6abd2697bdf22a6b31994073d00d.ctex"
+uid="uid://4o6lvf400lk2"
+path="res://.godot/imported/SideDoor.png-9e60c33febfec2931e21cf8bd57dd383.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://knifeButteredUp.png"
-dest_files=["res://.godot/imported/knifeButteredUp.png-f4da6abd2697bdf22a6b31994073d00d.ctex"]
+source_file="res://Assets/SideDoor.png"
+dest_files=["res://.godot/imported/SideDoor.png-9e60c33febfec2931e21cf8bd57dd383.ctex"]
 
 [params]
 

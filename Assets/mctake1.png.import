@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7w42wuhy5imn"
-path="res://.godot/imported/BreadBackground.png-7adf768908a88c13a8786a4cb371ac43.ctex"
+uid="uid://b7vosdgca6fq7"
+path="res://.godot/imported/mctake1.png-b7c19f4f65274f448479bb4ace791251.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BreadBackground.png"
-dest_files=["res://.godot/imported/BreadBackground.png-7adf768908a88c13a8786a4cb371ac43.ctex"]
+source_file="res://Assets/mctake1.png"
+dest_files=["res://.godot/imported/mctake1.png-b7c19f4f65274f448479bb4ace791251.ctex"]
 
 [params]
 
