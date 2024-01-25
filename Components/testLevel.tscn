@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b55uhn4wh4vj2"]
+[gd_scene load_steps=12 format=3 uid="uid://b55uhn4wh4vj2"]
 
 [ext_resource type="PackedScene" uid="uid://0v6aivj7thy1" path="res://Components/jar_ofjam.tscn" id="1_iaf52"]
 [ext_resource type="Texture2D" uid="uid://bkavyn1skfn50" path="res://Starter Tiles Platformer/DarkCastleTiles/DarkCastle_1_16x16.png" id="1_wjvut"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dlct3j6ri5wbj" path="res://Components/testPlayer.tscn" id="2_uli1g"]
 [ext_resource type="Texture2D" uid="uid://bur3v0kpw1mjc" path="res://Starter Tiles Platformer/SwampTiles/Bramble_1_16x16.png" id="3_un2dm"]
 [ext_resource type="PackedScene" uid="uid://cb3uruvndmmvx" path="res://Components/knifeCharacter.tscn" id="3_x37yf"]
+[ext_resource type="PackedScene" uid="uid://ds3cicqhhvsbn" path="res://peanutButter.tscn" id="7_vxp17"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_udqft"]
 texture = ExtResource("1_wjvut")
@@ -56,6 +57,10 @@ layer_0/tile_data = PackedInt32Array(1966080, 0, 0, 1966081, 0, 0, 1966082, 0, 0
 
 [node name="mainPlayer" parent="." instance=ExtResource("2_uli1g")]
 scale = Vector2(0.315, 0.315)
+
+[node name="PeanutButterContainer" parent="." instance=ExtResource("7_vxp17")]
+position = Vector2(346, 15)
+scale = Vector2(0.6, 0.6)
 
 [node name="Knife" parent="." instance=ExtResource("3_x37yf")]
 position = Vector2(363, 122)

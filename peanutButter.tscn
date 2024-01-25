@@ -1,9 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://ds3cicqhhvsbn"]
+[gd_scene load_steps=4 format=3 uid="uid://ds3cicqhhvsbn"]
 
+[ext_resource type="Script" path="res://peanutButter.cs" id="1_0nb5i"]
 [ext_resource type="Texture2D" uid="uid://b5gailgic6td6" path="res://Assets/peanutButterjar.png" id="1_tbwc2"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t3q13"]
+size = Vector2(213, 189)
 
-[node name="PeanutButterjar" type="Sprite2D" parent="."]
+[node name="PeanutButterContainer" type="CharacterBody2D"]
+script = ExtResource("1_0nb5i")
+
+[node name="ContainerCollosion" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(191, 188, 191, 386, 200, 387, 200, 397, 292, 398, 410, 396, 410, 387, 428, 386, 427, 187, 416, 187, 416, 376, 202, 376, 202, 187)
+
+[node name="LidCollosionBorder" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(470, 323, 470, 376, 705, 377, 705, 323)
+
+[node name="PeanutButterSprite" type="Sprite2D" parent="."]
 position = Vector2(565, 251)
 texture = ExtResource("1_tbwc2")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(309.5, 281.5)
+shape = SubResource("RectangleShape2D_t3q13")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
