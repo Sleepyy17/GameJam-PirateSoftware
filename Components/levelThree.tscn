@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dalbsp8nf3q2o"]
+[gd_scene load_steps=13 format=3 uid="uid://e3gl77uoecqy"]
 
 [ext_resource type="Texture2D" uid="uid://l8d7hvp5k1it" path="res://Assets/KitchenCounteTiles.png" id="1_dkbbi"]
 [ext_resource type="Script" path="res://Components/levelThree.cs" id="1_h1nf3"]

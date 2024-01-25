@@ -150,8 +150,10 @@ public partial class knifeCharacter : CharacterBody2D
 		Vector2 velocity = Velocity;
 
 		//test
-		FallProgress += (float)delta;
-		velocity.Y += FallProgress * Gravity * (float)delta*10;
+		if (!IsOnFloor()) {
+			FallProgress += (float)delta;
+			velocity.Y += FallProgress * Gravity * (float)delta*10;
+		}
 		//Velocity = rigidBody.LinearVelocity;
 		Velocity = velocity;
 		
@@ -163,7 +165,7 @@ public partial class knifeCharacter : CharacterBody2D
 		if (velocity.Length() > 0.1f) {
 			//if (isRotating) 
 			//{
-			this.Rotate(Velocity.X/20*MathF.Sqrt(FallProgress*20)*(float)0.005f);
+			this.Rotate((Velocity.X/18+(Velocity.Sign().X*MathF.Sqrt(FallProgress*20)))*(float)0.005f);
 
 			//}
 			// else 
@@ -250,6 +252,7 @@ public partial class knifeCharacter : CharacterBody2D
 		} else {
 			moveable = false;
 		}
+		FallProgress = 0;
 	}
 
 	Vector2 handleCollision(Vector2 velocity, KinematicCollision2D collision) {
