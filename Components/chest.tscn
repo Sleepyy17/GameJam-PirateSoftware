@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ef538xr1n2dr"]
 
-[ext_resource type="Script" path="res://Chest.cs" id="1_6sai6"]
-[ext_resource type="Texture2D" uid="uid://bcmxsydm0oq7e" path="res://chest.png" id="2_o6vve"]
+[ext_resource type="Script" path="res://Scripts/Chest.cs" id="1_0dhbh"]
+[ext_resource type="Texture2D" uid="uid://bcmxsydm0oq7e" path="res://Assets/chest.png" id="2_o6vve"]
 
 [sub_resource type="Animation" id="Animation_q3ycs"]
 resource_name = "chest_close"
@@ -46,7 +46,7 @@ size = Vector2(212, 190)
 
 [node name="Chest" type="Node2D"]
 position = Vector2(587, 290)
-script = ExtResource("1_6sai6")
+script = ExtResource("1_0dhbh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, -4)
