@@ -8,7 +8,7 @@ public partial class jar_ofjam : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		knifeWithJam = (Texture2D)ResourceLoader.Load("res://knifeWithJam.png");
+		knifeWithJam = (Texture2D)ResourceLoader.Load("res://Assets/knifeWithJam.png");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
