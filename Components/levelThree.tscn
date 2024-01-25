@@ -1,13 +1,18 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=13 format=3 uid="uid://e3gl77uoecqy"]
+=======
+[gd_scene load_steps=14 format=3 uid="uid://bjkqohl7mqhec"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Texture2D" uid="uid://l8d7hvp5k1it" path="res://Assets/KitchenCounteTiles.png" id="1_dkbbi"]
-[ext_resource type="Script" path="res://Components/levelThree.cs" id="1_h1nf3"]
+[ext_resource type="Script" path="res://Scripts/levelThree.cs" id="1_h1nf3"]
 [ext_resource type="Texture2D" uid="uid://bwaqca2duldm8" path="res://Assets/Sprite-0002.png" id="2_lfeyf"]
 [ext_resource type="Texture2D" uid="uid://phhxfo8eeaq0" path="res://Assets/ExtraTile.png" id="2_w3imf"]
 [ext_resource type="PackedScene" uid="uid://c7q1v3ibcsa63" path="res://Components/venhilationHood.tscn" id="3_hcouu"]
-[ext_resource type="PackedScene" path="res://Components/out_of_bounds.tscn" id="4_a0qwh"]
+[ext_resource type="PackedScene" uid="uid://cpdcvfka41aqi" path="res://Components/out_of_bounds.tscn" id="4_a0qwh"]
 [ext_resource type="PackedScene" uid="uid://dfvfb6ta4nah0" path="res://Components/end_node.tscn" id="5_44d0n"]
 [ext_resource type="PackedScene" uid="uid://cb3uruvndmmvx" path="res://Components/knifeCharacter.tscn" id="8_qyovu"]
+[ext_resource type="PackedScene" uid="uid://duar4e2qmx7l" path="res://Components/win_screen.tscn" id="9_pr7ii"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ek87f"]
 texture = ExtResource("1_dkbbi")
@@ -135,15 +140,31 @@ scale = Vector2(2.80301, 1)
 position = Vector2(546, 1106)
 
 [node name="Knife" parent="." instance=ExtResource("8_qyovu")]
-position = Vector2(134, 34)
+position = Vector2(124, 59)
 scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" type="Camera2D" parent="Knife"]
 zoom = Vector2(2, 2)
 limit_bottom = 1400
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Knife/Camera2D"]
+remote_path = NodePath("../../../Node2D")
+update_rotation = false
+update_scale = false
+
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(275, 1322)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(124, 59)
+scale = Vector2(0.5, 0.5)
+
+[node name="WinScreen" parent="Node2D" instance=ExtResource("9_pr7ii")]
+process_mode = 3
+visible = false
+layout_direction = 1
+offset_right = 1.0
+offset_bottom = 1.0
 
 [connection signal="body_entered" from="VenhilationHood2/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="VenhilationHood3/Area2D" to="." method="_on_area_2d_body_entered"]

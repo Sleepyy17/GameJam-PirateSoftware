@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=15 format=3 uid="uid://bom11barjl6w4"]
+=======
+[gd_scene load_steps=15 format=3 uid="uid://b5pag6cv16y4f"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Texture2D" uid="uid://l8d7hvp5k1it" path="res://Assets/KitchenCounteTiles.png" id="1_exq8t"]
 [ext_resource type="Texture2D" uid="uid://bwaqca2duldm8" path="res://Assets/Sprite-0002.png" id="1_f3m1h"]
@@ -10,6 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://df2hedmogc44n" path="res://Components/Pause.tscn" id="3_w0l6t"]
 [ext_resource type="PackedScene" uid="uid://dfvfb6ta4nah0" path="res://Components/end_node.tscn" id="6_j5mbq"]
 [ext_resource type="PackedScene" uid="uid://cpdcvfka41aqi" path="res://Components/out_of_bounds.tscn" id="9_8dxg3"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="PackedScene" uid="uid://duar4e2qmx7l" path="res://Components/win_screen.tscn" id="10_o58co"]
+>>>>>>> Stashed changes
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5l2l"]
 size = Vector2(334.416, 94.2208)
@@ -77,7 +85,7 @@ physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_5tkw7")
 sources/3 = SubResource("TileSetAtlasSource_qy3q7")
 
-[node name="LevelIdea2" type="Node2D"]
+[node name="LevelTwo" type="Node2D"]
 script = ExtResource("1_odqe2")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -124,10 +132,16 @@ zoom = Vector2(2, 2)
 limit_bottom = 1300
 limit_smoothed = true
 
+<<<<<<< Updated upstream
 [node name="PauseMenu" parent="Knife" instance=ExtResource("3_w0l6t")]
 process_mode = 3
 visible = false
 layout_direction = 2
+=======
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Knife/Camera2D"]
+remote_path = NodePath("../../../Node2D")
+update_rotation = false
+>>>>>>> Stashed changes
 
 [node name="EndNode" parent="." instance=ExtResource("6_j5mbq")]
 position = Vector2(-538, 968)
@@ -140,5 +154,13 @@ scale = Vector2(0.461712, 0.461712)
 [node name="OutOfBounds" parent="." instance=ExtResource("9_8dxg3")]
 position = Vector2(2254, 1577)
 scale = Vector2(3.69236, 1.25157)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(233, 983)
+scale = Vector2(0.461712, 0.461712)
+
+[node name="WinScreen" parent="Node2D" instance=ExtResource("10_o58co")]
+process_mode = 3
+visible = false
 
 [connection signal="body_entered" from="VenhilationHood2/Area2D" to="." method="_on_area_2d_body_entered"]
