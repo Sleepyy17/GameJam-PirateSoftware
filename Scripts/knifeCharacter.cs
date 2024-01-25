@@ -26,14 +26,31 @@ public partial class knifeCharacter : CharacterBody2D
 
 	bool stuckToWall = false;
 	bool isRotating = false;
-	bool isHandleAreaContact = false;
+	
 
-	bool ifJamOn = false;
-	bool ifPeanutOn = false;
 
-	bool isBladeOnNonStick = false;
+	public enum KnifeAreaContacts {
+		Blade,
+		Handle,
+	}
+	KnifeAreaContacts knifeAreaContact = KnifeAreaContacts.Handle;
 
-	bool isBladeOnNormal = false;
+	public enum BladeSpreadStates {
+		NoSpread,
+		JamOn,
+		PeanutOn,
+	}
+
+	BladeSpreadStates bladeSpreadState = BladeSpreadStates.NoSpread;
+
+	public enum BladeContactStates {
+		Normal,
+		OnNonStick,
+		Death,
+	}
+	
+	BladeContactStates bladeContactState = BladeContactStates.Normal;
+	
 
 	bool moveable = false;
 
@@ -43,71 +60,35 @@ public partial class knifeCharacter : CharacterBody2D
 ////////////////////////////////////////////////////
 	public void _on_blade_area_body_entered(Node obj)
 	{
-		 GD.Print(this.Name + " blade collided with " + obj.Name);
-		 if (obj is TileMap)
-		{
-			// Get the cell coordinates where the collision occurred
-			TileMap body = (TileMap) obj;
-			var collision = GetSlideCollision(0);
-			if (collision == null) {
-				GD.Print("NULLCASE");
-				isBladeOnNormal = true;
-				return;
-			}
-			Vector2 colpos = collision.GetPosition();
-
-			colpos = GetClosestCell(body, body.LocalToMap(colpos));
-	
-			//Vector2I cellPosition = body.LocalToMap(colpos);
-			
-			var customData = (TileData)body.GetCellTileData(0, (Vector2I)colpos);
-			GD.Print(customData);
-			// Check for the custom property in the tileset
-			// int tileId = ((TileMap)body).GetCell(cellPosition);
-			// TileSet tileset = ((TileMap)body).TileSet;
-			bool touchedLava = (bool)customData.GetCustomData("Lava");
-			bool touchedNonStick = (bool)customData.GetCustomData("NonStick");
-			bool touchedNormal = (bool)customData.GetCustomData("Normal");
-			
-			if (touchedLava)
-			{
-				// Game over logic
-				GD.Print("Game Over!");
-				// GetTree().ReloadCurrentScene();
-				GetNode<Sprite2D>("KnifeSprite").Texture = knifeWIthPeanut;
-			}
-			if (touchedNonStick) {
-				GD.Print("NonStick");
-				isBladeOnNonStick = true;
-			}
-			if (touchedNormal) {
-				GD.Print("Normal");
-				isBladeOnNormal = true;
-			}
-			else {
-				GD.Print("Normal Backup");
-				isBladeOnNormal = true;
-			}
-		} else {
-			isBladeOnNormal = true;
+		GD.Print(this.Name + " blade collided with " + obj.Name);
+		if (obj is TileMap) {
+			knifeAreaContact = KnifeAreaContacts.Blade;
 		}
+		
 	}
 	
 	public void _on_blade_area_body_exited(Node obj) {
 		GD.Print(this.Name + " handle exited from " + obj.Name);
-		resetCollisionVariables();
+		if (obj is TileMap) {
+			resetCollisionVariables();
+			//knifeAreaContact = KnifeAreaContacts.Handle;
+		}
 	}
 
 	public void _on_handle_area_body_entered(Node obj)
 	{
 		GD.Print(this.Name + " handle collided with " + obj.Name);
-		isHandleAreaContact = true;
+		if (obj is TileMap) {
+			knifeAreaContact = KnifeAreaContacts.Handle;
+		}
 	}
 	// dasdsad
 	private void _on_handle_area_body_exited(Node obj)
 	{
 		GD.Print(this.Name + " handle exited from " + obj.Name);
-		isHandleAreaContact = false;
+		if (obj is TileMap) {
+			//knifeAreaContact = KnifeAreaContacts.Blade;
+		}
 	}
 
 	   public override void _Input(InputEvent @event)
@@ -128,22 +109,16 @@ public partial class knifeCharacter : CharacterBody2D
 		rigidBody.GravityScale = 0;
 		knifeWIthPeanut = (Texture2D)ResourceLoader.Load("res://knifeButteredUp.png");
 		knifeWithJam = (Texture2D)ResourceLoader.Load("res://knifeWithJam.png");
-
-		ifJamOn = false;
-		ifPeanutOn = false;
-		
 	}
 
 	public override void _Process(double delta)
 	{	
 		Sprite2D knifeSprite = this.GetNode("KnifeSprite") as Sprite2D;
 		if (knifeSprite.Texture == knifeWithJam) {
-			ifJamOn = true;
-			ifPeanutOn = false;
+			bladeSpreadState = BladeSpreadStates.JamOn;
 		}
 		if (knifeSprite.Texture == knifeWIthPeanut) {
-			ifPeanutOn = true;
-			ifJamOn = false;
+			bladeSpreadState = BladeSpreadStates.PeanutOn;
 		}
 		//GD.Print(ifJamOn);
 		// if mouse down do function
@@ -199,29 +174,74 @@ public partial class knifeCharacter : CharacterBody2D
 		}
 
 ////////// HANDLE COLLISION /////////////////////
-		var collision = GetSlideCollision(GetSlideCollisionCount() - 1);
+///
+		var collision = GetSlideCollision(0); // Get the most recent collision
+        TileMap body = (TileMap)collision.GetCollider(); // Get the collider
+        // GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
+		var collisionName = ((Node)collision.GetCollider()).Name;
+		Vector2 colpos = collision.GetPosition();
+
+		colpos = GetClosestCell(body, body.LocalToMap(colpos));
+	
+			//Vector2I cellPosition = body.LocalToMap(colpos);
+			
+		var customData = (TileData)body.GetCellTileData(0, (Vector2I)colpos);
+			//GD.Print("herllo" + customData);
+			// Check for the custom property in the tileset
+			// int tileId = ((TileMap)body).GetCell(cellPosition);
+			// TileSet tileset = ((TileMap)body).TileSet;
+		bool touchedLava = (bool)customData.GetCustomData("Lava");
+		bool touchedNonStick = (bool)customData.GetCustomData("NonStick");
+		bool touchedNormal = (bool)customData.GetCustomData("Normal");
+			
+			
+		if (touchedLava)
+		{
+			// Game over logic
+			//GD.Print("Game Over!");
+			// GetTree().ReloadCurrentScene();
+			GetNode<Sprite2D>("KnifeSprite").Texture = knifeWIthPeanut;
+			bladeContactState = BladeContactStates.Death;
+
+		}
+		if (touchedNonStick) {
+			//GD.Print("NonStick");
+			bladeContactState = BladeContactStates.OnNonStick;
+		}
+		if (touchedNormal) {
+				//GD.Print("Normal");
+			bladeContactState = BladeContactStates.Normal;
+		}
 		
 		// isHandle -> Jam ->  
-		//GD.Print($"isHandle: {isHandleAreaContact}, IsBladeOnNonStick: {isBladeOnNonStick}, IsBladeOnNormal: {isBladeOnNormal}");
+		//GD.Print($"BladeContactState: {bladeContactState}, BladeSpreadState: {bladeSpreadState}, KnifeAreaContact: {knifeAreaContact}");
 		if (collision != null) {
 			moveable = true;
-			FallProgress = 0;
 			// print isHandle, IsBladeOnNonStick, IsBladeOnNormal;
+			FallProgress = 0;
 			Velocity = velocity;
-			if (isHandleAreaContact) {	
-				Velocity = Velocity.Bounce(collision.GetNormal())*(float)0.2;
-			} else if (ifJamOn) {
-				Velocity = Velocity.Bounce(collision.GetNormal())*(float)0.4;
-			} else if (isBladeOnNonStick == true) {
+			if (knifeAreaContact == KnifeAreaContacts.Handle) {	
+				//GD.Print(velocity);
+				Velocity = Velocity.Bounce(GetSlideCollision(GetSlideCollisionCount() - 1).GetNormal())*(float)0.2;
+				//GD.Print("BOUNCE");
+		        //GD.Print(velocity);
+
+			} 
+			// ONLY IF KNIFE IS ON BLADE SIDE
+			else if (bladeSpreadState == BladeSpreadStates.JamOn) {
+				Velocity = Velocity.Bounce(GetSlideCollision(GetSlideCollisionCount() - 1).GetNormal())*(float)0.4;
+			} 
+			// ONLY IF KNIFE IS ON BLADE SIDE AND DOES NOT HAVE JAM
+			else if (bladeContactState == BladeContactStates.OnNonStick) {
 				//velocity.X = 0;
 				velocity.Y = 100;
-				if (ifPeanutOn) 
+				if (bladeSpreadState == BladeSpreadStates.PeanutOn) 
 				{
 					velocity.Y = 0;
 				}
 				Velocity = velocity;
 				//Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
-			} else if (isBladeOnNormal == true) {
+			} else if (bladeContactState == BladeContactStates.Normal) {
 				velocity.X = 0;
 				velocity.Y = 0;
 				Velocity = velocity;
@@ -232,7 +252,40 @@ public partial class knifeCharacter : CharacterBody2D
 		}
 	}
 
+	Vector2 handleCollision(Vector2 velocity, KinematicCollision2D collision) {
+		//GD.Print($"isHandle: {isHandleAreaContact}, IsBladeOnNonStick: {isBladeOnNonStick}, IsBladeOnNormal: {isBladeOnNormal}");
+		//GD.Print($"BladeContactState: {bladeContactState}, BladeSpreadState: {bladeSpreadState}, KnifeAreaContact: {knifeAreaContact}");
+		FallProgress = 0;
+			if (knifeAreaContact == KnifeAreaContacts.Handle) {	
+		//GD.Print(velocity);
+				velocity = velocity.Bounce(GetSlideCollision(0).GetNormal())*(float)1;
+				GD.Print("BOUNCE");
+		        GD.Print(velocity);
 
+			} 
+			// ONLY IF KNIFE IS ON BLADE SIDE
+			else if (bladeSpreadState == BladeSpreadStates.JamOn) {
+				velocity = velocity.Bounce(GetSlideCollision(GetSlideCollisionCount() - 1).GetNormal())*(float)0.4;
+			} 
+			// ONLY IF KNIFE IS ON BLADE SIDE AND DOES NOT HAVE JAM
+			else if (bladeContactState == BladeContactStates.OnNonStick) {
+				//velocity.X = 0;
+				velocity.Y = 100;
+				if (bladeSpreadState == BladeSpreadStates.PeanutOn) 
+				{
+					velocity.Y = 0;
+				}
+				Velocity = velocity;
+				//Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
+			} else if (bladeContactState == BladeContactStates.Normal) {
+				velocity.X = 0;
+				velocity.Y = 0;
+				Velocity = velocity;
+				//Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
+			} 
+
+		return velocity;
+	}
 /////////////////////////////////////////////////////////
 //////////// MOVEMENT BASED HELPERS /////////////////////
 /////////////////////////////////////////////////////////
@@ -269,7 +322,7 @@ public partial class knifeCharacter : CharacterBody2D
 	{
 		ThrowKnife();
 		isInAir = true;
-		GD.Print("Mouse up");
+		//GD.Print("Mouse up");
 	}
 
 	void ThrowKnife()
@@ -286,9 +339,9 @@ public partial class knifeCharacter : CharacterBody2D
 //////////// COLLISION BASED HELPERS /////////////////////
 /////////////////////////////////////////////////////////
 	void resetCollisionVariables() {
-		isBladeOnNonStick = false;
+		//isBladeOnNonStick = false;
 		//isHandleAreaContact = false;
-		isBladeOnNormal = false;
+		//isBladeOnNormal = false;
 		stuckToWall = false;
 	}
 
@@ -307,7 +360,7 @@ public partial class knifeCharacter : CharacterBody2D
 				closestCell = cell;
 			}
 		}
-		GD.Print(closestCell);
+		//GD.Print(closestCell);
 		return closestCell;
 	}
 

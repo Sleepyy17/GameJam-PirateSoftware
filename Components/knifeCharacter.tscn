@@ -21,15 +21,15 @@ visible = false
 [node name="BladeArea" type="Area2D" parent="."]
 
 [node name="BladeSide" type="CollisionPolygon2D" parent="BladeArea"]
-polygon = PackedVector2Array(33, -39, 33, -17, 0, 16, -11, 4)
+polygon = PackedVector2Array(46, -80, 63, -30, 0, 20, -16, 2)
 
 [node name="HandleArea" type="Area2D" parent="."]
 
 [node name="HandleSide" type="CollisionPolygon2D" parent="HandleArea"]
-polygon = PackedVector2Array(-39, 41, -39, 30, -14, 6, -6, 16, -30, 41)
+polygon = PackedVector2Array(-78, 58, -22, -1, 0, 23, -40, 88)
 
 [node name="BladeSideCol" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(32, -36, 31, -17, 0, 14, -9, 4)
+polygon = PackedVector2Array(31, -36, 31, -17, 0, 14, -9, 4)
 
 [node name="HandleSideCol" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-37, 31, -16, 11, -10, 17, -31, 38)
