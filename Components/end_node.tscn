@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfvfb6ta4nah0"]
+[gd_scene load_steps=4 format=3 uid="uid://dfvfb6ta4nah0"]
 
+[ext_resource type="Script" path="res://Scripts/EndNode.cs" id="1_pcknd"]
 [ext_resource type="Texture2D" uid="uid://bvqpk80qmdg6n" path="res://Assets/BreadEnd.png" id="1_v3xbq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7v5g"]
 size = Vector2(101, 6)
 
 [node name="EndNode" type="Node2D"]
+position = Vector2(1, -48)
 scale = Vector2(0.502513, 0.502513)
+script = ExtResource("1_pcknd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(173.714, 48)
@@ -25,3 +28,6 @@ polygon = PackedVector2Array(-680.062, 114.188, -684, 189, 674.437, 185.063, 682
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(54, 76)
 shape = SubResource("RectangleShape2D_u7v5g")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
