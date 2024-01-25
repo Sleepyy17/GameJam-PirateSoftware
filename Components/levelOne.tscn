@@ -1,12 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://cywux2k0s7ek4"]
+[gd_scene load_steps=13 format=3 uid="uid://dv6by0xcp2bnx"]
 
 [ext_resource type="Texture2D" uid="uid://bwaqca2duldm8" path="res://Assets/Sprite-0002.png" id="1_hlsnl"]
 [ext_resource type="PackedScene" uid="uid://cb3uruvndmmvx" path="res://Components/knifeCharacter.tscn" id="2_adbjs"]
-[ext_resource type="PackedScene" uid="uid://bljteamfm5mct" path="res://Components/SideOpenCabinetObj.tscn" id="3_4upfs"]
+[ext_resource type="PackedScene" path="res://Components/SideOpenCabinetObj.tscn" id="3_4upfs"]
 [ext_resource type="Texture2D" uid="uid://l8d7hvp5k1it" path="res://Assets/KitchenCounteTiles.png" id="3_cnmhx"]
 [ext_resource type="Texture2D" uid="uid://phhxfo8eeaq0" path="res://Assets/ExtraTile.png" id="3_my6aq"]
 [ext_resource type="PackedScene" uid="uid://dfvfb6ta4nah0" path="res://Components/end_node.tscn" id="4_h7wcc"]
-[ext_resource type="PackedScene" uid="uid://cpdcvfka41aqi" path="res://Components/out_of_bounds.tscn" id="7_2glye"]
+[ext_resource type="PackedScene" path="res://Components/out_of_bounds.tscn" id="7_2glye"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tcfy2"]
 

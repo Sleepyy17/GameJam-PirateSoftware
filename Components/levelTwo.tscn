@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b5pag6cv16y4f"]
+[gd_scene load_steps=14 format=3 uid="uid://dqxp5xspuefs6"]
 
 [ext_resource type="Texture2D" uid="uid://l8d7hvp5k1it" path="res://Assets/KitchenCounteTiles.png" id="1_exq8t"]
 [ext_resource type="Texture2D" uid="uid://bwaqca2duldm8" path="res://Assets/Sprite-0002.png" id="1_f3m1h"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://4o6lvf400lk2" path="res://Assets/SideDoor.png" id="3_5in4j"]
 [ext_resource type="Texture2D" uid="uid://phhxfo8eeaq0" path="res://Assets/ExtraTile.png" id="3_sffim"]
 [ext_resource type="PackedScene" uid="uid://dfvfb6ta4nah0" path="res://Components/end_node.tscn" id="6_j5mbq"]
-[ext_resource type="PackedScene" uid="uid://cpdcvfka41aqi" path="res://Components/out_of_bounds.tscn" id="9_8dxg3"]
+[ext_resource type="PackedScene" path="res://Components/out_of_bounds.tscn" id="9_8dxg3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5l2l"]
 size = Vector2(334.416, 94.2208)
