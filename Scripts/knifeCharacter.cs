@@ -111,12 +111,12 @@ public partial class knifeCharacter : CharacterBody2D
 	}
 
 	   public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("restart"))
-        {
-            GetTree().ReloadCurrentScene();
-        }
-    }
+	{
+		if (@event.IsActionPressed("restart"))
+		{
+			GetTree().ReloadCurrentScene();
+		}
+	}
 
 /////////////////////////////////////////////////
 //////////// MAIN FUNCTIONS /////////////////////

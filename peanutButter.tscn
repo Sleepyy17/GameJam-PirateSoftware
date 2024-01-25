@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds3cicqhhvsbn"]
+
+[ext_resource type="Texture2D" uid="uid://b5gailgic6td6" path="res://Assets/peanutButterjar.png" id="1_tbwc2"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="PeanutButterjar" type="Sprite2D" parent="."]
+position = Vector2(565, 251)
+texture = ExtResource("1_tbwc2")
