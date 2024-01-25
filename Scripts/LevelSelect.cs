@@ -15,12 +15,6 @@ public partial class LevelSelect : Control
         LockTwo = GetNode<MarginContainer>("GridContainer/PanelContainer2/Lock2");
         LockThree = GetNode<MarginContainer>("GridContainer/PanelContainer3/Lock3");
         LockOne.QueueFree();
-<<<<<<< Updated upstream
-       }
-       if (g.LevelTwo) {
-        LockTwo.QueueFree();
-       }
-=======
         if (g.LevelOneComplete) {
             LockTwo.QueueFree();
             if (g.LevelTwoComplete) {
@@ -35,7 +29,6 @@ public partial class LevelSelect : Control
         tree.Paused = false;
     }
     
->>>>>>> Stashed changes
     }
     public void OnLevelOnePressed() {
         GetTree().ChangeSceneToFile("res://Components/levelOne.tscn");

@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=13 format=3 uid="uid://e3gl77uoecqy"]
-=======
-[gd_scene load_steps=14 format=3 uid="uid://bjkqohl7mqhec"]
->>>>>>> Stashed changes
+[gd_scene load_steps=15 format=3 uid="uid://c5il52acdg005"]
 
 [ext_resource type="Texture2D" uid="uid://l8d7hvp5k1it" path="res://Assets/KitchenCounteTiles.png" id="1_dkbbi"]
 [ext_resource type="Script" path="res://Scripts/levelThree.cs" id="1_h1nf3"]
@@ -13,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dfvfb6ta4nah0" path="res://Components/end_node.tscn" id="5_44d0n"]
 [ext_resource type="PackedScene" uid="uid://cb3uruvndmmvx" path="res://Components/knifeCharacter.tscn" id="8_qyovu"]
 [ext_resource type="PackedScene" uid="uid://duar4e2qmx7l" path="res://Components/win_screen.tscn" id="9_pr7ii"]
+[ext_resource type="PackedScene" uid="uid://df2hedmogc44n" path="res://Components/Pause.tscn" id="10_tjpku"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ek87f"]
 texture = ExtResource("1_dkbbi")
@@ -165,6 +162,10 @@ visible = false
 layout_direction = 1
 offset_right = 1.0
 offset_bottom = 1.0
+
+[node name="PauseMenu" parent="Node2D" instance=ExtResource("10_tjpku")]
+process_mode = 3
+visible = false
 
 [connection signal="body_entered" from="VenhilationHood2/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="VenhilationHood3/Area2D" to="." method="_on_area_2d_body_entered"]

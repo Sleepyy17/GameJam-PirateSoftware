@@ -62,6 +62,7 @@ layout_mode = 2
 texture = ExtResource("2_mbvu6")
 
 [node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+modulate = Color(1, 1, 1, 0.270588)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -74,6 +75,7 @@ layout_mode = 2
 texture = ExtResource("3_k6v6b")
 
 [node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+modulate = Color(1, 1, 1, 0.270588)
 layout_mode = 2
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/Button2" to="." method="OnMenuPressed"]

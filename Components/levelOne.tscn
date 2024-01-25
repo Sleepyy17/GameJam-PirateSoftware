@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=13 format=3 uid="uid://cux6eef4vl30q"]
-=======
-[gd_scene load_steps=13 format=3 uid="uid://cywux2k0s7ek4"]
->>>>>>> Stashed changes
+[gd_scene load_steps=14 format=3 uid="uid://hvetrqsnhcxr"]
 
 [ext_resource type="Texture2D" uid="uid://bwaqca2duldm8" path="res://Assets/Sprite-0002.png" id="1_hlsnl"]
 [ext_resource type="PackedScene" uid="uid://cb3uruvndmmvx" path="res://Components/knifeCharacter.tscn" id="2_adbjs"]
@@ -11,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dfvfb6ta4nah0" path="res://Components/end_node.tscn" id="4_h7wcc"]
 [ext_resource type="PackedScene" uid="uid://cpdcvfka41aqi" path="res://Components/out_of_bounds.tscn" id="7_2glye"]
 [ext_resource type="PackedScene" uid="uid://duar4e2qmx7l" path="res://Components/win_screen.tscn" id="7_bdmqw"]
+[ext_resource type="PackedScene" uid="uid://df2hedmogc44n" path="res://Components/Pause.tscn" id="8_kcj6d"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tcfy2"]
 
@@ -2757,5 +2754,9 @@ position = Vector2(1561, -64)
 scale = Vector2(0.3, 0.3)
 
 [node name="WinScreen" parent="Node2D" instance=ExtResource("7_bdmqw")]
+process_mode = 3
+visible = false
+
+[node name="PauseMenu" parent="Node2D" instance=ExtResource("8_kcj6d")]
 process_mode = 3
 visible = false
