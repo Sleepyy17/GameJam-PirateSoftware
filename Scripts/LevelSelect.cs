@@ -17,6 +17,9 @@ public partial class LevelSelect : Control
        if (g.LevelOne) {
         LockOne.QueueFree();
        }
+       if (g.LevelTwo) {
+        LockTwo.QueueFree();
+       }
     }
     public void OnLevelOnePressed() {
         if (g.LevelOne) {

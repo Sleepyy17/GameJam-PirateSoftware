@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=3 uid="uid://df2hedmogc44n"]
+
+[ext_resource type="Script" path="res://Components/Pause.cs" id="1_c4ik8"]
+[ext_resource type="Texture2D" uid="uid://dqine6v4md65b" path="res://Assets/OneIdk.png" id="2_va27i"]
+[ext_resource type="Texture2D" uid="uid://balv5xp1b3re2" path="res://Assets/2.png" id="4_8lftv"]
+[ext_resource type="Texture2D" uid="uid://bruo0h5i2ick0" path="res://Assets/3.png" id="5_irp0h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1le8b"]
+font_size = 36
+outline_size = 9
+shadow_size = 16
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c4ik8")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+offset_left = -287.0
+offset_top = -83.0
+offset_right = -129.0
+offset_bottom = -33.0
+scale = Vector2(3.7084, 3.7084)
+columns = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/PanelContainer/MarginContainer2"]
+layout_mode = 2
+texture = ExtResource("2_va27i")
+
+[node name="Label" type="Label" parent="GridContainer/PanelContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_1le8b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GridContainer/PanelContainer"]
+modulate = Color(1, 1, 1, 0.0941176)
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/PanelContainer2/MarginContainer2"]
+layout_mode = 2
+texture = ExtResource("4_8lftv")
+
+[node name="Label" type="Label" parent="GridContainer/PanelContainer2"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "2"
+
+[node name="Button" type="Button" parent="GridContainer/PanelContainer2"]
+modulate = Color(1, 1, 1, 0.0941176)
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/PanelContainer3/MarginContainer2"]
+layout_mode = 2
+texture = ExtResource("5_irp0h")
+
+[node name="Label" type="Label" parent="GridContainer/PanelContainer3"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "3"
+
+[node name="Button" type="Button" parent="GridContainer/PanelContainer3"]
+modulate = Color(1, 1, 1, 0.0941176)
+layout_mode = 2
+
+[connection signal="gui_input" from="GridContainer" to="GridContainer/PanelContainer" method="_on_gui_input"]
+[connection signal="gui_input" from="GridContainer" to="GridContainer/PanelContainer2" method="_on_gui_input"]
+[connection signal="gui_input" from="GridContainer" to="GridContainer/PanelContainer3" method="_on_grid_container_gui_input"]
+[connection signal="pressed" from="GridContainer/PanelContainer/Button" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="GridContainer/PanelContainer2/Button" to="." method="_on_level_select_pressed"]
+[connection signal="pressed" from="GridContainer/PanelContainer3/Button" to="." method="_on_main_menu_pressed"]
