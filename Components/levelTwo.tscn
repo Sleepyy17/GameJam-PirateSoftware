@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://7utfmlgweqti"]
+[gd_scene load_steps=16 format=3 uid="uid://bom11barjl6w4"]
 
 [ext_resource type="Texture2D" uid="uid://l8d7hvp5k1it" path="res://Assets/KitchenCounteTiles.png" id="1_exq8t"]
 [ext_resource type="Texture2D" uid="uid://bwaqca2duldm8" path="res://Assets/Sprite-0002.png" id="1_f3m1h"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dfvfb6ta4nah0" path="res://Components/end_node.tscn" id="6_j5mbq"]
 [ext_resource type="PackedScene" uid="uid://cpdcvfka41aqi" path="res://Components/out_of_bounds.tscn" id="9_8dxg3"]
 [ext_resource type="PackedScene" uid="uid://df2hedmogc44n" path="res://Components/Pause.tscn" id="10_2rlxv"]
-[ext_resource type="PackedScene" uid="uid://duar4e2qmx7l" path="res://Components/win_screen.tscn" id="10_o58co"]
+[ext_resource type="PackedScene" uid="uid://btoie4xo77gm1" path="res://Components/win_screen.tscn" id="10_o58co"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5l2l"]
 size = Vector2(334.416, 94.2208)

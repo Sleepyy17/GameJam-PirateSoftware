@@ -12,6 +12,7 @@ public partial class knifeCharacter : CharacterBody2D
 	private Texture2D knifeWIthPeanut;
 	private Texture2D knifeWithJam;
 	
+	public float clickCounter = 0;
 
 //////////////////////////////////////////
 //////////// VARIABLES ///////////////////
@@ -109,6 +110,7 @@ public partial class knifeCharacter : CharacterBody2D
 		rigidBody.GravityScale = 0;
 		knifeWIthPeanut = (Texture2D)ResourceLoader.Load("res://knifeButteredUp.png");
 		knifeWithJam = (Texture2D)ResourceLoader.Load("res://knifeWithJam.png");
+		clickCounter = 0;
 	}
 
 	public override void _Process(double delta)
@@ -325,6 +327,7 @@ public partial class knifeCharacter : CharacterBody2D
 	{
 		ThrowKnife();
 		isInAir = true;
+		clickCounter += 1;
 		//GD.Print("Mouse up");
 	}
 
