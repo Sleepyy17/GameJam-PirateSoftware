@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cpdcvfka41aqi" path="res://Components/out_of_bounds.tscn" id="4_a0qwh"]
 [ext_resource type="PackedScene" uid="uid://dfvfb6ta4nah0" path="res://Components/end_node.tscn" id="5_44d0n"]
 [ext_resource type="PackedScene" uid="uid://cb3uruvndmmvx" path="res://Components/knifeCharacter.tscn" id="8_qyovu"]
-[ext_resource type="PackedScene" uid="uid://duar4e2qmx7l" path="res://Components/win_screen.tscn" id="9_pr7ii"]
+[ext_resource type="PackedScene" uid="uid://btoie4xo77gm1" path="res://Components/win_screen.tscn" id="9_pr7ii"]
 [ext_resource type="PackedScene" uid="uid://df2hedmogc44n" path="res://Components/Pause.tscn" id="10_tjpku"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ek87f"]

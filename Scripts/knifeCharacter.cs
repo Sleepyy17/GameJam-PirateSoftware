@@ -93,12 +93,12 @@ public partial class knifeCharacter : CharacterBody2D
 	}
 
 	   public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("restart"))
-        {
-            GetTree().ReloadCurrentScene();
-        }
-    }
+	{
+		if (@event.IsActionPressed("restart"))
+		{
+			GetTree().ReloadCurrentScene();
+		}
+	}
 
 /////////////////////////////////////////////////
 //////////// MAIN FUNCTIONS /////////////////////
@@ -180,8 +180,8 @@ public partial class knifeCharacter : CharacterBody2D
 ////////// HANDLE COLLISION /////////////////////
 ///
 		var collision = GetSlideCollision(0); // Get the most recent collision
-        TileMap body = (TileMap)collision.GetCollider(); // Get the collider
-        // GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
+		TileMap body = (TileMap)collision.GetCollider(); // Get the collider
+		// GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
 		var collisionName = ((Node)collision.GetCollider()).Name;
 		Vector2 colpos = collision.GetPosition();
 
@@ -228,7 +228,7 @@ public partial class knifeCharacter : CharacterBody2D
 				//GD.Print(velocity);
 				Velocity = Velocity.Bounce(GetSlideCollision(GetSlideCollisionCount() - 1).GetNormal())*(float)0.2;
 				//GD.Print("BOUNCE");
-		        //GD.Print(velocity);
+				//GD.Print(velocity);
 
 			} 
 			// ONLY IF KNIFE IS ON BLADE SIDE
@@ -265,7 +265,7 @@ public partial class knifeCharacter : CharacterBody2D
 		//GD.Print(velocity);
 				velocity = velocity.Bounce(GetSlideCollision(0).GetNormal())*(float)1;
 				GD.Print("BOUNCE");
-		        GD.Print(velocity);
+				GD.Print(velocity);
 
 			} 
 			// ONLY IF KNIFE IS ON BLADE SIDE
