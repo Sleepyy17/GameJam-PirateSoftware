@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgi6rk6pf77uu"]
+[gd_scene load_steps=3 format=3 uid="uid://cgi6rk6pf77uu"]
 
 [ext_resource type="Script" path="res://Scripts/Globals.cs" id="1_kjj4y"]
+[ext_resource type="AudioStream" uid="uid://dxmwprf08rnml" path="res://Game_Music-1 (1).mp3" id="2_iykmo"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_kjj4y")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_iykmo")

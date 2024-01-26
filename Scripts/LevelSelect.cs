@@ -6,6 +6,7 @@ public partial class LevelSelect : Control
     public MarginContainer LockOne;
     public MarginContainer LockTwo;
     public MarginContainer LockThree;
+     public MarginContainer LockFour;
     public Globals g;
 
     public override void _Ready()
@@ -14,13 +15,14 @@ public partial class LevelSelect : Control
         LockOne = GetNode<MarginContainer>("GridContainer/PanelContainer/Lock1");
         LockTwo = GetNode<MarginContainer>("GridContainer/PanelContainer2/Lock2");
         LockThree = GetNode<MarginContainer>("GridContainer/PanelContainer3/Lock3");
+        LockFour = GetNode<MarginContainer>("GridContainer/PanelContainer4/Lock4");
         LockOne.QueueFree();
         if (g.LevelOneComplete) {
             LockTwo.QueueFree();
             if (g.LevelTwoComplete) {
                 LockThree.QueueFree();
                 if (g.LevelThreeComplete) {
-                    
+                    LockFour.QueueFree();
                 }
             }
         }
@@ -44,5 +46,13 @@ public partial class LevelSelect : Control
         if (g.LevelTwoComplete) {
             GetTree().ChangeSceneToFile("res://Components/levelThree.tscn");
         }
+    }
+    public void OnLevelFourPressed() {
+        if (g.LevelThreeComplete) {
+            GetTree().ChangeSceneToFile("res://Components/levelFour.tscn");
+        }
+    }
+    public void OnBackPressed() {
+        GetTree().ChangeSceneToFile("res://Components/menu.tscn");
     }
 }

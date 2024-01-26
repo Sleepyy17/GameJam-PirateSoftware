@@ -30,9 +30,9 @@ public partial class EndNode : Node2D
                 g.LevelOneComplete = true;
             } else if (name == "LevelTwo") {
                 g.LevelTwoComplete = true;
-            }
-            GD.Print("Yefewfeway");
-            GD.Print(WinScreen.Visible);
+            } else if (name == "LevelThree") {
+                g.LevelThreeComplete = true;
+            } 
             WinScreen.Visible = true;
             tree.Paused = true;
         }

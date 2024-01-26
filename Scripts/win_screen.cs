@@ -13,7 +13,9 @@ public partial class win_screen : Control
             name = "LevelTwo";
         } else if (name == "LevelTwo") {
             name = "LevelThree";
-        }
+        } else if (name == "LevelThree") {
+            name = "LevelFour";
+        } 
     }
 
     public void OnNextLevelPressed() {

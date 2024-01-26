@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bom11barjl6w4"]
+[gd_scene load_steps=17 format=3 uid="uid://bom11barjl6w4"]
 
 [ext_resource type="Texture2D" uid="uid://l8d7hvp5k1it" path="res://Assets/KitchenCounteTiles.png" id="1_exq8t"]
 [ext_resource type="Texture2D" uid="uid://bwaqca2duldm8" path="res://Assets/Sprite-0002.png" id="1_f3m1h"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cpdcvfka41aqi" path="res://Components/out_of_bounds.tscn" id="9_8dxg3"]
 [ext_resource type="PackedScene" uid="uid://df2hedmogc44n" path="res://Components/Pause.tscn" id="10_2rlxv"]
 [ext_resource type="PackedScene" uid="uid://btoie4xo77gm1" path="res://Components/win_screen.tscn" id="10_o58co"]
+[ext_resource type="Texture2D" uid="uid://d0k05sdxv5vbq" path="res://Assets/arrow.png" id="12_xga61"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5l2l"]
 size = Vector2(334.416, 94.2208)
@@ -116,7 +117,7 @@ scale = Vector2(1.73955, 1.47685)
 texture = ExtResource("3_5in4j")
 
 [node name="Knife" parent="." instance=ExtResource("2_upj07")]
-position = Vector2(233, 983)
+position = Vector2(233, 999)
 rotation = 2.37365
 scale = Vector2(0.461712, 0.461712)
 
@@ -142,7 +143,7 @@ position = Vector2(2254, 1577)
 scale = Vector2(3.69236, 1.25157)
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(233, 983)
+position = Vector2(233, 999)
 scale = Vector2(0.461712, 0.461712)
 
 [node name="PauseMenu" parent="Node2D" instance=ExtResource("10_2rlxv")]
@@ -152,5 +153,17 @@ visible = false
 [node name="WinScreen" parent="Node2D" instance=ExtResource("10_o58co")]
 process_mode = 3
 visible = false
+anchors_preset = 0
+offset_left = -788.37
+offset_top = -396.351
+offset_right = 803.63
+offset_bottom = 386.649
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(160, -70)
+scale = Vector2(1.85, 1.82692)
+texture = ExtResource("12_xga61")
 
 [connection signal="body_entered" from="VenhilationHood2/Area2D" to="." method="_on_area_2d_body_entered"]
