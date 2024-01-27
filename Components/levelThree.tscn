@@ -185,7 +185,7 @@ scale = Vector2(2.80301, 1)
 position = Vector2(546, 1106)
 
 [node name="Knife" parent="." instance=ExtResource("8_qyovu")]
-position = Vector2(-126, 42)
+position = Vector2(-126, 37)
 rotation = 2.26893
 scale = Vector2(0.5, 0.5)
 
@@ -205,7 +205,7 @@ position = Vector2(-143, 92)
 position = Vector2(275, 1322)
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(-126, 42)
+position = Vector2(-126, 37)
 scale = Vector2(0.5, 0.5)
 
 [node name="WinScreen" parent="Node2D" instance=ExtResource("9_pr7ii")]

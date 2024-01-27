@@ -9,17 +9,17 @@ public partial class win_screen : Control
     {
         tree = GetTree();
         name = tree.CurrentScene.Name;
-        if (name == "LevelOne") {
-            name = "LevelTwo";
-        } else if (name == "LevelTwo") {
-            name = "LevelThree";
-        } else if (name == "LevelThree") {
-            name = "LevelFour";
-        } 
     }
 
     public void OnNextLevelPressed() {
-        tree.ChangeSceneToFile("res://Components/" + name + ".tscn");
+        if (name == "LevelOne") {
+            tree.ChangeSceneToFile("res://Components/LevelTwo.tscn");
+        } else if (name == "LevelTwo") {
+            tree.ChangeSceneToFile("res://Components/LevelThree.tscn");
+        } else if (name == "LevelThree") {
+            tree.ChangeSceneToFile("res://Components/LevelFour.tscn");
+        } 
+        
     }
     public void OnMenuPressed() {
         tree.ChangeSceneToFile("res://Components/menu.tscn");
