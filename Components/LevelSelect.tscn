@@ -27,10 +27,10 @@ script = ExtResource("1_wu4e1")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -590.0
-offset_top = -325.0
-offset_right = 584.0
-offset_bottom = 333.0
+offset_left = -1199.0
+offset_top = -607.0
+offset_right = 1201.0
+offset_bottom = 738.0
 texture = ExtResource("2_1hajn")
 
 [node name="GridContainer" type="GridContainer" parent="."]

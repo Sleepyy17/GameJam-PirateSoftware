@@ -2756,6 +2756,7 @@ scale = Vector2(0.3, 0.3)
 [node name="WinScreen" parent="Node2D" instance=ExtResource("7_bdmqw")]
 process_mode = 3
 visible = false
+anchors_preset = -1
 anchor_top = 1.655
 anchor_bottom = 1.655
 offset_left = -693.0

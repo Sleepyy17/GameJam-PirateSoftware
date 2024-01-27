@@ -7,6 +7,7 @@
 
 [node name="WinScreen" type="Control"]
 layout_mode = 3
+anchors_preset = 0
 offset_left = -556.0
 offset_top = -235.0
 offset_right = 1036.0
