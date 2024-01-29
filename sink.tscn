@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk80ug2sguyhq"]
+
+[ext_resource type="Script" path="res://Scripts/Sink.cs" id="1_qt0e4"]
+[ext_resource type="Texture2D" uid="uid://qnab1f0b4g1m" path="res://Assets/sink-Sheet.png" id="2_ioa2l"]
+
+[sub_resource type="Animation" id="Animation_8hlvs"]
+resource_name = "RunningWater"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sink-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_5t0wd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sink-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nn5jh"]
+_data = {
+"RESET": SubResource("Animation_5t0wd"),
+"RunningWater": SubResource("Animation_8hlvs")
+}
+
+[node name="Sink" type="Node2D"]
+script = ExtResource("1_qt0e4")
+
+[node name="Sink-sheet" type="Sprite2D" parent="."]
+position = Vector2(593, 326)
+texture = ExtResource("2_ioa2l")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nn5jh")
+}

@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvkf4fsgnadu4"]
+[gd_scene load_steps=10 format=3 uid="uid://bvkf4fsgnadu4"]
 
 [ext_resource type="Texture2D" uid="uid://dqine6v4md65b" path="res://Assets/OneIdk.png" id="1_b2otu"]
 [ext_resource type="Script" path="res://Scripts/LevelSelect.cs" id="1_wu4e1"]
+[ext_resource type="Texture2D" uid="uid://bwaqca2duldm8" path="res://Assets/Sprite-0002.png" id="2_1hajn"]
 [ext_resource type="Texture2D" uid="uid://bqxrfblgow81f" path="res://Assets/JamLock.png" id="2_uoih6"]
 [ext_resource type="Texture2D" uid="uid://balv5xp1b3re2" path="res://Assets/2.png" id="3_unm0m"]
 [ext_resource type="Texture2D" uid="uid://bruo0h5i2ick0" path="res://Assets/3.png" id="4_wpqk7"]
+[ext_resource type="Texture2D" uid="uid://bewmg7046h11t" path="res://Components/Four.png" id="6_yo127"]
+[ext_resource type="Texture2D" uid="uid://b1kf0ghrvdncq" path="res://Scripts/BackIcon.png" id="7_dgrdv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1le8b"]
 font_size = 36
@@ -22,21 +25,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wu4e1")
 
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -1199.0
+offset_top = -607.0
+offset_right = 1201.0
+offset_bottom = 738.0
+texture = ExtResource("2_1hajn")
+
 [node name="GridContainer" type="GridContainer" parent="."]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
-offset_left = -287.0
-offset_top = -83.0
-offset_right = -129.0
-offset_bottom = -33.0
+offset_left = -379.0
+offset_top = -69.0
+offset_right = -167.0
+offset_bottom = -19.0
 scale = Vector2(3.7084, 3.7084)
-columns = 3
+columns = 4
 
 [node name="PanelContainer" type="PanelContainer" parent="GridContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="GridContainer/PanelContainer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="GridContainer/PanelContainer/MarginContainer2"]
@@ -120,9 +132,55 @@ texture = ExtResource("2_uoih6")
 modulate = Color(1, 1, 1, 0.0941176)
 layout_mode = 2
 
+[node name="PanelContainer4" type="PanelContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="GridContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/PanelContainer4/MarginContainer2"]
+layout_mode = 2
+texture = ExtResource("6_yo127")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="GridContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="Lock4" type="MarginContainer" parent="GridContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/PanelContainer4/Lock4"]
+layout_mode = 2
+texture = ExtResource("2_uoih6")
+
+[node name="Button" type="Button" parent="GridContainer/PanelContainer4"]
+modulate = Color(1, 1, 1, 0.0941176)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -513.0
+offset_top = 182.0
+offset_right = -473.0
+offset_bottom = 222.0
+scale = Vector2(2.46587, 2.46587)
+texture = ExtResource("7_dgrdv")
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0.0705882)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = -513.0
+offset_top = 182.0
+offset_right = -413.0
+offset_bottom = 282.0
+
 [connection signal="gui_input" from="GridContainer" to="GridContainer/PanelContainer" method="_on_gui_input"]
 [connection signal="gui_input" from="GridContainer" to="GridContainer/PanelContainer2" method="_on_gui_input"]
 [connection signal="gui_input" from="GridContainer" to="GridContainer/PanelContainer3" method="_on_grid_container_gui_input"]
 [connection signal="pressed" from="GridContainer/PanelContainer/Button" to="." method="OnLevelOnePressed"]
 [connection signal="pressed" from="GridContainer/PanelContainer2/Button" to="." method="OnLevelTwoPressed"]
 [connection signal="pressed" from="GridContainer/PanelContainer3/Button" to="." method="OnLevelThreePressed"]
+[connection signal="pressed" from="GridContainer/PanelContainer4/Button" to="." method="OnLevelFourPressed"]
+[connection signal="pressed" from="Button" to="." method="OnBackPressed"]

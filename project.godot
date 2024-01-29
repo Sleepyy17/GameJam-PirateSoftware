@@ -10,15 +10,19 @@ config_version=5
 
 [application]
 
-config/name="GameJam14"
-run/main_scene="res://Components/testLevel.tscn"
+config/name="Spread The Jam"
+run/main_scene="res://Components/menu.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/GameIcon.png"
 
 [autoload]
 
 Globals="*res://Scripts/Globals.cs"
 Gm="*res://GM.tscn"
+
+[display]
+
+window/size/mode=3
 
 [dotnet]
 

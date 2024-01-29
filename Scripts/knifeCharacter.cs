@@ -11,8 +11,10 @@ public partial class knifeCharacter : CharacterBody2D
 	Line2D line;
 	private Texture2D knifeWIthPeanut;
 	private Texture2D knifeWithJam;
+	public Globals g;
+	public Node scene;
 	
-	public float clickCounter = 0;
+	// public float clickCounter = 0;
 
 //////////////////////////////////////////
 //////////// VARIABLES ///////////////////
@@ -51,9 +53,8 @@ public partial class knifeCharacter : CharacterBody2D
 	}
 	
 	BladeContactStates bladeContactState = BladeContactStates.Normal;
-	
 
-	bool moveable = false;
+
 
 
 ////////////////////////////////////////////////////
@@ -93,24 +94,26 @@ public partial class knifeCharacter : CharacterBody2D
 	}
 
 	   public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("restart"))
-        {
-            GetTree().ReloadCurrentScene();
-        }
-    }
+	{
+		if (@event.IsActionPressed("restart"))
+		{
+			GetTree().ReloadCurrentScene();
+		}
+	}
 
 /////////////////////////////////////////////////
 //////////// MAIN FUNCTIONS /////////////////////
 /////////////////////////////////////////////////
 	public override void _Ready()
 	{
+		g = (Globals)GetNode("/root/Globals");
+		scene = GetTree().CurrentScene;
 		rigidBody = GetNode<RigidBody2D>("RigidBody2D");
 		line = GetNode<Line2D>("Line2D");
 		rigidBody.GravityScale = 0;
 		knifeWIthPeanut = (Texture2D)ResourceLoader.Load("res://knifeButteredUp.png");
 		knifeWithJam = (Texture2D)ResourceLoader.Load("res://knifeWithJam.png");
-		clickCounter = 0;
+		g.clickCounter = 0;
 	}
 
 	public override void _Process(double delta)
@@ -126,7 +129,7 @@ public partial class knifeCharacter : CharacterBody2D
 		// if mouse down do function
 
 ///////////////////// MOUSE MOVEMENT //////////////////////////
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && moveable)
+		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
 			if (mouseWasReleased)
 			{
@@ -180,8 +183,8 @@ public partial class knifeCharacter : CharacterBody2D
 ////////// HANDLE COLLISION /////////////////////
 ///
 		var collision = GetSlideCollision(0); // Get the most recent collision
-        TileMap body = (TileMap)collision.GetCollider(); // Get the collider
-        // GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
+		TileMap body = (TileMap)collision.GetCollider(); // Get the collider
+		// GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
 		var collisionName = ((Node)collision.GetCollider()).Name;
 		Vector2 colpos = collision.GetPosition();
 
@@ -201,11 +204,20 @@ public partial class knifeCharacter : CharacterBody2D
 			
 		if (touchedLava)
 		{
+			if (scene.Name == "LevelOne") {
+				g.totalLevelOneDeaths++;
+			} else if (scene.Name == "LevelTwo") {
+				g.totalLevelTwoDeaths++;
+			} else if (scene.Name == "LevelThree") {
+				g.totalLevelThreeDeaths++;
+			} else if (scene.Name == "LevelFour") {
+				g.totalLevelFourDeaths++;
+			}
 			// Game over logic
 			//GD.Print("Game Over!");
-			// GetTree().ReloadCurrentScene();
-			GetNode<Sprite2D>("KnifeSprite").Texture = knifeWIthPeanut;
-			bladeContactState = BladeContactStates.Death;
+			GetTree().ReloadCurrentScene();
+			// GetNode<Sprite2D>("KnifeSprite").Texture = knifeWIthPeanut;
+			// bladeContactState = BladeContactStates.Death;
 
 		}
 		if (touchedNonStick) {
@@ -220,7 +232,7 @@ public partial class knifeCharacter : CharacterBody2D
 		// isHandle -> Jam ->  
 		//GD.Print($"BladeContactState: {bladeContactState}, BladeSpreadState: {bladeSpreadState}, KnifeAreaContact: {knifeAreaContact}");
 		if (collision != null) {
-			moveable = true;
+
 			// print isHandle, IsBladeOnNonStick, IsBladeOnNormal;
 			FallProgress = 0;
 			Velocity = velocity;
@@ -228,7 +240,7 @@ public partial class knifeCharacter : CharacterBody2D
 				//GD.Print(velocity);
 				Velocity = Velocity.Bounce(GetSlideCollision(GetSlideCollisionCount() - 1).GetNormal())*(float)0.2;
 				//GD.Print("BOUNCE");
-		        //GD.Print(velocity);
+				//GD.Print(velocity);
 
 			} 
 			// ONLY IF KNIFE IS ON BLADE SIDE
@@ -251,9 +263,7 @@ public partial class knifeCharacter : CharacterBody2D
 				Velocity = velocity;
 				//Velocity = Velocity.Slide(collision.GetNormal())*(float)0.2;
 			} 
-		} else {
-			moveable = false;
-		}
+		} 
 		FallProgress = 0;
 	}
 
@@ -265,7 +275,7 @@ public partial class knifeCharacter : CharacterBody2D
 		//GD.Print(velocity);
 				velocity = velocity.Bounce(GetSlideCollision(0).GetNormal())*(float)1;
 				GD.Print("BOUNCE");
-		        GD.Print(velocity);
+				GD.Print(velocity);
 
 			} 
 			// ONLY IF KNIFE IS ON BLADE SIDE
@@ -327,7 +337,17 @@ public partial class knifeCharacter : CharacterBody2D
 	{
 		ThrowKnife();
 		isInAir = true;
-		clickCounter += 1;
+		g.clickCounter += 1;
+		if (scene.Name == "LevelOne") {
+			g.totalLevelOneClicks++;
+		} else if (scene.Name == "LevelTwo") {
+			g.totalLevelTwoClicks++;
+		} else if (scene.Name == "LevelThree") {
+			g.totalLevelThreeClicks++;
+		} else if (scene.Name == "LevelFour") {
+			g.totalLevelFourClicks++;
+		}
+		g.totalGameClicks++;
 		//GD.Print("Mouse up");
 	}
 
